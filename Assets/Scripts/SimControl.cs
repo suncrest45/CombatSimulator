@@ -44,12 +44,19 @@ public class SimControl : MonoBehaviour
     public static float DT;
 
     //How many different AI types (and therefore how many "fights") do we want?
-    public int Fights = 6;
+    public int Fights = 18;
     private int FightCount = 0;
     public static bool SimOver = false; //Have all the fights been completed?
     public static string CurrentAI = "Random"; //What's the current type of AI for this fight?
+
+    // Mode variables
     private int GroupModeRounds = 0;
     private int MixedModeRounds = 0;
+
+    // Telemetry Mode Variables
+    private int TelemetryModeRounds = 10;
+    private int TelemetryRoundCount = 0;
+
     //How many rounds is each "fight"?
     public int Rounds = 6;
     private int RoundCount = 0;
@@ -603,6 +610,84 @@ public class SimControl : MonoBehaviour
         SpawnInfoText("ROUND " + MixedModeRounds); //Look! A string concatenation operator!
 
         //Reset the round delay timer (and round start flag) for after this new round ends.
+        RoundTimer = RoundDelay;
+        RoundStart = true;
+    }
+
+    // Fight each enemy type 10 times
+    void TelemetryModeSim()
+    {
+        //It's the start of a fight, so start a new round.
+        if (RoundCount == 0)
+            telemetryModeRounds();
+
+        RoundOver = IsRoundOver();
+        if (RoundOver == false) //The round isn't over, so run the simulation (all the logic is in the updates of other classes).
+            TotalFightTime += DT; //Accumulate the SIMULATED time for telemetry data.
+        else if (RoundTimer > 0.0f) //The round is over, but this is the delay before a new round.
+            RoundTimer -= DT; //Update the round delay timer.
+        else //Time for a new round.
+            telemetryModeRounds();
+    }
+
+    void telemetryModeRounds()
+    {
+        RoundCount++;
+        ClearEnemies();
+
+        if (RoundCount > 10)
+        {
+            NewFight();
+        }
+
+        // The fights to perform
+        switch(FightCount) 
+        {
+            // Single Target Fights
+            case 0:
+                {
+                    Instantiate(EnemyTypePrefabs[0], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
+                }
+                break;
+
+            case 1: 
+                {
+                    Instantiate(EnemyTypePrefabs[1], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
+                }
+                break;
+
+            case 2:
+                {
+                    Instantiate(EnemyTypePrefabs[2], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
+                }
+                break;
+
+            case 3:
+                {
+                    Instantiate(EnemyTypePrefabs[3], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
+                }
+                break;
+
+            case 4:
+                {
+                    Instantiate(EnemyTypePrefabs[4], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
+                }
+                break;
+
+            case 5:
+                {
+                    Instantiate(EnemyTypePrefabs[5], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
+                }
+                break;
+        }
+
+        // Call the Initialize() functions for the player.
+        Player.Initialize();
+
+        // Feedback is good...
+        SpawnInfoText("ROUND " + MixedModeRounds); //Look! A string concatenation operator!
+
+        // Reset the round delay timer (and round start flag) for after this new round ends.
         RoundTimer = RoundDelay;
         RoundStart = true;
     }

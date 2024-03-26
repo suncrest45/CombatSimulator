@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour
     public float MoveSpeed = 0.1f;
     public float OptimalRange = 5.0f;
     public float StunTimer = 0.0f;
+    public string EnemyName = string.Empty;
 
     [HideInInspector]
     public float HitPoints = 200; //Current hit points.
