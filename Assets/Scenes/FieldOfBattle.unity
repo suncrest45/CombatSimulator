@@ -219,6 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c05c73910caf1498c1346151bc1f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityName: Fact Check
   CooldownTime: 5
   DamageDone: 0
   PowerUsed: -20
@@ -1479,6 +1480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c05c73910caf1498c1346151bc1f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityName: Cancel
   CooldownTime: 3
   DamageDone: 100
   PowerUsed: 50
@@ -1728,6 +1730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c05c73910caf1498c1346151bc1f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityName: Light-Skin Stare
   CooldownTime: 5
   DamageDone: 0
   PowerUsed: 20
@@ -1770,9 +1773,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6deaac7b45ff9bd4086939ab628a4a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Fights: 6
-  Rounds: 6
+  Fights: 36
+  Rounds: 10
   RoundDelay: 3
+  Abilities:
+  - {fileID: 1748617876}
+  - {fileID: 857497628}
+  - {fileID: 54602738}
+  - {fileID: 792839301}
+  - {fileID: 1407681352}
 --- !u!4 &909307868
 Transform:
   m_ObjectHideFlags: 0
@@ -2248,6 +2257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c05c73910caf1498c1346151bc1f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityName: OK BOOMER!!!
   CooldownTime: 0
   DamageDone: 300
   PowerUsed: 100
@@ -2860,6 +2870,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c05c73910caf1498c1346151bc1f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityName: Tweet
   CooldownTime: 1
   DamageDone: 2
   PowerUsed: -1

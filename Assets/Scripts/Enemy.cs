@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
     public float MoveSpeed = 0.1f;
     public float OptimalRange = 5.0f;
     public float StunTimer = 0.0f;
-    public string EnemyName = string.Empty;
+    public static string EnemyName = string.Empty;
 
     [HideInInspector]
     public float HitPoints = 200; //Current hit points.
@@ -46,6 +46,12 @@ public class Enemy : MonoBehaviour
     public EnemyAbility AbilityOne; //Always need this to be a "real" ability.
     [HideInInspector]
     public EnemyAbility AbilityTwo; //This one might be inactive for simple enemies.
+
+    public static string NameAccessor
+    { 
+        get => EnemyName;
+        set => EnemyName = value; 
+    }
 
     //Start is called before the first frame update
     void Start()
@@ -153,6 +159,8 @@ public class Enemy : MonoBehaviour
             //Set the damage text to just the integer amount of the damage done.
             //Uses the "empty string plus number" trick to make it a string.
             damageText.text = "" + Mathf.Floor(damage);
+            SimControl.DamageDone += damage;
+            FightRecorder.DPSAccessor += damage;
         }
         //Return true if dead.
         return (HitPoints <= 0.0f);
