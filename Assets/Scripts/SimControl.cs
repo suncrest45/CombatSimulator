@@ -53,10 +53,6 @@ public class SimControl : MonoBehaviour
     private int GroupModeRounds = 0;
     private int MixedModeRounds = 0;
 
-    // Telemetry Mode Variables
-    private int TelemetryModeRounds = 10;
-    private int TelemetryRoundCount = 0;
-
     //How many rounds is each "fight"?
     public int Rounds = 6;
     private int RoundCount = 0;
@@ -264,6 +260,11 @@ public class SimControl : MonoBehaviour
         {
             MixedSim();
         }
+
+        if (TelemetryMode)
+        {
+            TelemetryModeSim();
+        }
     }
 
     //The round is over if either the player is dead or all enemies are.
@@ -274,7 +275,7 @@ public class SimControl : MonoBehaviour
         {
             if (RoundOver == false) //Player just died.
             {
-                SpawnInfoText("DEFEAT...");
+                SpawnInfoText("Cringe...");
                 Defeats++;
             }
             return true;
@@ -372,7 +373,14 @@ public class SimControl : MonoBehaviour
         DamageDone = 0;
         TotalFightTime = 0;
         //After the first fight (which is random), just spam a single key for each fight.
-        CurrentAI = "Spam" + FightCount;
+        if (!TelemetryMode)
+        {
+            CurrentAI = "Spam" + FightCount;
+        }
+        else
+        {
+            CurrentAI = "Random";
+        }
     }
 
     //Destroy all the enemy game objects.
@@ -617,6 +625,9 @@ public class SimControl : MonoBehaviour
     // Fight each enemy type 10 times
     void TelemetryModeSim()
     {
+        CurrentAI = "Random";
+        FastMode = true;
+        AutoMode = true;
         //It's the start of a fight, so start a new round.
         if (RoundCount == 0)
             telemetryModeRounds();
@@ -640,52 +651,42 @@ public class SimControl : MonoBehaviour
             NewFight();
         }
 
-        // The fights to perform
-        switch(FightCount) 
+
+        // Single Enemy Fights
+        if (FightCount < 6)
         {
-            // Single Target Fights
-            case 0:
-                {
-                    Instantiate(EnemyTypePrefabs[0], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
-                }
-                break;
-
-            case 1: 
-                {
-                    Instantiate(EnemyTypePrefabs[1], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
-                }
-                break;
-
-            case 2:
-                {
-                    Instantiate(EnemyTypePrefabs[2], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
-                }
-                break;
-
-            case 3:
-                {
-                    Instantiate(EnemyTypePrefabs[3], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
-                }
-                break;
-
-            case 4:
-                {
-                    Instantiate(EnemyTypePrefabs[4], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
-                }
-                break;
-
-            case 5:
-                {
-                    Instantiate(EnemyTypePrefabs[5], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
-                }
-                break;
+            Instantiate(EnemyTypePrefabs[FightCount], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
         }
+        // Group Fights
+        else if (FightCount < 12 )
+        {
+            Instantiate(EnemyTypePrefabs[FightCount - 6], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
+            Instantiate(EnemyTypePrefabs[FightCount - 6], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
+            Instantiate(EnemyTypePrefabs[FightCount - 6], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
+        }
+        // Mixed Preset Fights
+        else
+        {
+            // An array for the mixed preset
+            int[,] TelemetryMixedPresets = {
+                {0, 1, 2 },
+                {1, 5, 1 },
+                {3, 2, 1 },
+                {4, 2, 2 },
+                {5, 3, 2 },
+                {5, 5, 5 },
+            };
 
+            Instantiate(EnemyTypePrefabs[TelemetryMixedPresets[FightCount - 12, 0]], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
+            Instantiate(EnemyTypePrefabs[TelemetryMixedPresets[FightCount - 12, 1]], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
+            Instantiate(EnemyTypePrefabs[TelemetryMixedPresets[FightCount - 12, 2]], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
+        }
+ 
         // Call the Initialize() functions for the player.
         Player.Initialize();
 
         // Feedback is good...
-        SpawnInfoText("ROUND " + MixedModeRounds); //Look! A string concatenation operator!
+        SpawnInfoText("ROUND " + RoundCount); //Look! A string concatenation operator!
 
         // Reset the round delay timer (and round start flag) for after this new round ends.
         RoundTimer = RoundDelay;

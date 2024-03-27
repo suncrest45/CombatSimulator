@@ -192,7 +192,7 @@ public class Hero : MonoBehaviour
     {
         //Get a random number between 1 and 4. Yes, the integer version of this function is not
         //inclusive. This is wrong and Unity should feel bad for doing this.
-        return UseAbility(Random.Range(0, 5));
+        return UseAbility(Random.Range(0, Abilities.Length));
     }
 
     //Try to use a specific ability.
