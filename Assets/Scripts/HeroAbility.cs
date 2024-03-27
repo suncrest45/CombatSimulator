@@ -27,6 +27,7 @@ using UnityEngine.UI; //This is here so we don't have to type out longer names f
 public class HeroAbility : MonoBehaviour
 {
     //Properties that define the ability's cooldown time, damage done, power used, range, etc.
+    public string EnemyName = string.Empty;
     public float CooldownTime = 1.0f;
     public float DamageDone = 1.0f;
     public float PowerUsed = 1.0f;

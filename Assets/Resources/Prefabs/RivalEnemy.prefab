@@ -692,6 +692,7 @@ MonoBehaviour:
   MoveSpeed: 2
   OptimalRange: 3
   StunTimer: 3
+  EnemyName: Alpha
   HitPoints: 200
   Target: {fileID: 0}
   HealthBar: {fileID: 0}

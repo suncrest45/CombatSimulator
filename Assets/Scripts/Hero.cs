@@ -81,6 +81,9 @@ public class Hero : MonoBehaviour
                 UseAbility(3);
             else if (SimControl.CurrentAI == "Spam5")
                 UseAbility(4);
+            else if (SimControl.CurrentAI == "Smart")
+                SmartAI();
+
         }
         else //Let the player select which abilities to use.
         {
@@ -206,6 +209,41 @@ public class Hero : MonoBehaviour
             }
         }
         return false;
+    }
+
+    // Smart AI
+    public void SmartAI()
+    {
+        // Keep a record of target distance
+        float distanceToTarget = transform.position.x - Target.transform.position.x;
+
+
+        // Spam the tweet ability
+        UseAbility(0);
+
+        // If an enemy is very close to the player use the light skin stare
+        if ((transform.position.x - Target.transform.position.x) < OptimalRange)
+        {
+            UseAbility(1);
+        }
+
+        // If the target is below 20% hit points, go in for the finisher.
+        if (Target.HitPoints < (0.2 * Target.MaxHitPoints) && distanceToTarget > Abilities[3].MaximumRange)
+        {
+            // Get the player in range to use the finisher
+            float newX = transform.position.x;
+            newX += MoveSpeed * SimControl.DT;
+            // Don't go past the edge of the arena.
+            newX = Mathf.Clamp(newX, -SimControl.EdgeDistance, SimControl.EdgeDistance);
+            // Update the transform.
+            transform.position = new Vector3(newX, transform.position.y, transform.position.z);
+
+            // When in range use the ability
+            if (distanceToTarget <= Abilities[3].MaximumRange)
+            {
+                UseAbility(3);
+            }
+        }
     }
 
     //Use a given amount of power.

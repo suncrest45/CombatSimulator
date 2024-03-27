@@ -649,6 +649,7 @@ MonoBehaviour:
   MoveSpeed: 0.75
   OptimalRange: 1
   StunTimer: 0
+  EnemyName: SoyWojack
   HitPoints: 200
   Target: {fileID: 0}
   HealthBar: {fileID: 0}

@@ -2250,7 +2250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CooldownTime: 0
   DamageDone: 300
-  PowerUsed: 0
+  PowerUsed: 100
   MaximumRange: 1.5
   Stuns: 0
   StunTimer: 0

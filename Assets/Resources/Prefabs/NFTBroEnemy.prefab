@@ -105,6 +105,7 @@ MonoBehaviour:
   MoveSpeed: 1
   OptimalRange: 10
   StunTimer: 0
+  EnemyName: NFTBro
   HitPoints: 200
   Target: {fileID: 0}
   HealthBar: {fileID: 0}

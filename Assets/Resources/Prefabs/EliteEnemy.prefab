@@ -203,6 +203,7 @@ MonoBehaviour:
   MoveSpeed: 2
   OptimalRange: 3
   StunTimer: 0
+  EnemyName: GymBro
   HitPoints: 200
   Target: {fileID: 0}
   HealthBar: {fileID: 0}
