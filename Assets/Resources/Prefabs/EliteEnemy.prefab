@@ -203,7 +203,6 @@ MonoBehaviour:
   MoveSpeed: 2
   OptimalRange: 3
   StunTimer: 0
-  EnemyName: GymBro
   HitPoints: 200
   Target: {fileID: 0}
   HealthBar: {fileID: 0}
@@ -254,7 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b79a8d4f3daf33d40b36b8c4961690e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CooldownTime: 1
+  CooldownTime: 2
   DamageDone: 5
   MaximumRange: 3
   RizzSteal: 0

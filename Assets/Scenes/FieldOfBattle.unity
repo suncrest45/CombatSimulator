@@ -162,7 +162,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -496, y: -185}
+  m_AnchoredPosition: {x: -499, y: -309}
   m_SizeDelta: {x: 132.98, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &54602736
@@ -219,7 +219,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c05c73910caf1498c1346151bc1f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AbilityName: Fact Check
+  AbilityName: Fact-Check
+  CatchyOneLiner: Good Ole Wikipedia
   CooldownTime: 5
   DamageDone: 0
   PowerUsed: -20
@@ -436,7 +437,7 @@ MonoBehaviour:
   MaxHitPoints: 200
   MoveSpeed: 2
   MaxPower: 100
-  OptimalRange: 1.5
+  OptimalRange: 4
   HitPoints: 200
   Power: 10
   Target: {fileID: 0}
@@ -1465,7 +1466,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -329, y: -185}
+  m_AnchoredPosition: {x: -326, y: -309}
   m_SizeDelta: {x: 132.98, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &792839301
@@ -1481,13 +1482,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AbilityName: Cancel
-  CooldownTime: 3
-  DamageDone: 100
-  PowerUsed: 50
-  MaximumRange: 1.5
+  CatchyOneLiner: L + Ratio
+  CooldownTime: 4
+  DamageDone: 50
+  PowerUsed: 25
+  MaximumRange: 4
   Stuns: 0
   StunTimer: 0
-  Finisher: 1
+  Finisher: 0
   AoE: 0
   Inactive: 0
   CooldownLeft: 0
@@ -1673,7 +1675,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -699, y: -185}
+  m_AnchoredPosition: {x: -703, y: -309}
   m_SizeDelta: {x: 201.15, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &857497626
@@ -1731,10 +1733,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AbilityName: Light-Skin Stare
+  CatchyOneLiner: '* Stares light skinnededly*'
   CooldownTime: 5
   DamageDone: 0
   PowerUsed: 20
-  MaximumRange: 4
+  MaximumRange: 30
   Stuns: 1
   StunTimer: 3
   Finisher: 0
@@ -2242,7 +2245,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -124, y: -185}
+  m_AnchoredPosition: {x: -119, y: -309}
   m_SizeDelta: {x: 181.62, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1407681352
@@ -2258,10 +2261,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AbilityName: OK BOOMER!!!
-  CooldownTime: 0
-  DamageDone: 300
-  PowerUsed: 100
-  MaximumRange: 1.5
+  CatchyOneLiner: OK BOOMER!!!
+  CooldownTime: 10
+  DamageDone: 100
+  PowerUsed: 50
+  MaximumRange: 30
   Stuns: 0
   StunTimer: 0
   Finisher: 0
@@ -2813,7 +2817,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -898, y: -185}
+  m_AnchoredPosition: {x: -900, y: -309}
   m_SizeDelta: {x: 120, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1748617874
@@ -2871,9 +2875,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AbilityName: Tweet
+  CatchyOneLiner: Check the internet lately
   CooldownTime: 1
   DamageDone: 2
-  PowerUsed: -1
+  PowerUsed: -5
   MaximumRange: 30
   Stuns: 0
   StunTimer: 0

@@ -492,11 +492,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de8edcfeb06504448ab24dd30113131b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHitPoints: 30
+  MaxHitPoints: 15
   MoveSpeed: 0.75
-  OptimalRange: 10
+  OptimalRange: 30
   StunTimer: 0
-  EnemyName: KeyboardWarrior
   HitPoints: 200
   Target: {fileID: 0}
   HealthBar: {fileID: 0}
@@ -547,9 +546,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b79a8d4f3daf33d40b36b8c4961690e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CooldownTime: 3
+  CooldownTime: 4
   DamageDone: 15
-  MaximumRange: 12
+  MaximumRange: 30
   RizzSteal: 0
   summoner: 0
   Inactive: 0

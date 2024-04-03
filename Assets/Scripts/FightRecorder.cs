@@ -17,6 +17,7 @@ public static class FightRecorder
     private static Dictionary<string, float> m_AbilityPercentage;
     private static int m_Rounds;
     private static float m_DamageDone;
+    private static float[] m_Ratings;
 
     // Constructor for the fight recorder class
     static FightRecorder()
@@ -33,6 +34,7 @@ public static class FightRecorder
         m_AbilityPercentage = new Dictionary<string, float>();
         m_Rounds = 10;
         m_DamageDone = 0.0f;
+        m_Ratings = new float[m_Rounds];
     }
 
     // Calculate The Win Percentage
@@ -94,6 +96,18 @@ public static class FightRecorder
 
     public static float GetAbilityUsage(string AbilityName) {  return m_AbilityPercentage[AbilityName]; }
 
+    public static float CalculateRoundRatings()
+    {
+        float total = 0.0f;
+
+        for (int i = 0; i < m_Ratings.Length; i++)
+        {
+            total += m_Ratings[i];
+        }
+
+        return total /= m_Ratings.Length;
+    }
+
     // Resets the recorder for a new fight
     public static void InitRecorder(HeroAbility[] playerAbilities, int num_rounds)
     {
@@ -109,12 +123,13 @@ public static class FightRecorder
         m_AbilityPercentage = new Dictionary<string, float>();
         m_Rounds = num_rounds;
         m_DamageDone = 0.0f;
+        m_Ratings = new float[num_rounds];
 
         // Initialise the dictionaries keeping track of the abilities.
         for (int i = 0; i < playerAbilities.Length; i++)
         {
-            m_AbilityUsage[playerAbilities[i].AbilityName] = 0;
-            m_AbilityPercentage[playerAbilities[i].AbilityName] = 0.0f;
+            m_AbilityUsage.Add(playerAbilities[i].AbilityName, 0);
+            m_AbilityPercentage.Add(playerAbilities[i].AbilityName, 0.0f);
         }
     }
 }

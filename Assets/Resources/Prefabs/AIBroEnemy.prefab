@@ -101,11 +101,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de8edcfeb06504448ab24dd30113131b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHitPoints: 50
+  MaxHitPoints: 25
   MoveSpeed: 1
   OptimalRange: 5
   StunTimer: 0
-  EnemyName: AIBro
   HitPoints: 200
   Target: {fileID: 0}
   HealthBar: {fileID: 0}

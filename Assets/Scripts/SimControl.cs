@@ -45,7 +45,7 @@ public class SimControl : MonoBehaviour
     public static float DT;
 
     //How many different AI types (and therefore how many "fights") do we want?
-    public int Fights = 18;
+    public int Fights = 36;
     private int FightCount = 0;
     public static bool SimOver = false; //Have all the fights been completed?
     public static string CurrentAI = "Random"; //What's the current type of AI for this fight?
@@ -109,7 +109,7 @@ public class SimControl : MonoBehaviour
         //This can just then be directly opened in Excel.
         DataStream = new StreamWriter("FightData.csv", true);
         //Write some headers for our columns. You'll need more columns than this eventually.
-        DataStream.WriteLine("AI TYPE,Enemy Type,Group,VICTORIES,DEFEATS,Win%,DPS,ROUND LENGTH,Ability0,Ability1,Ability2,Ability3,Ability4,Ability5");
+        DataStream.WriteLine("AI TYPE,Enemy Type,Group,VICTORIES,DEFEATS,Win%,DPS,ROUND LENGTH,Tweet,Light-Skin Stare,Fact-Check,Cancel,OK BOOMER!!!,Ratings,Ratings Difference");
 
         //Get a reference to the canvas (used for UI objects).
         Canvas = GameObject.Find("Canvas");
@@ -296,7 +296,7 @@ public class SimControl : MonoBehaviour
             {
                 SpawnInfoText("VICTORY!!!");
                 Victories++;
-                FightRecorder.WinsAccessor += Victories;
+                FightRecorder.WinsAccessor = Victories;
             }
             return true;
         }
@@ -366,14 +366,14 @@ public class SimControl : MonoBehaviour
         RoundStart = true;
     }
 
-    //Reset everything for the new fight.
+    // Reset everything for the new fight.
     void NewFight()
     {
         FightCount++;
         RoundCount = 0;
-        //Show a bit of telemetry data on screen.
+        // Show a bit of telemetry data on screen.
         SpawnInfoText(Victories + "-" + Defeats + "\n" + DamageDone / TotalFightTime + " DPS");
-        //Write all the telemetry data to the file.
+        // Write all the telemetry data to the file.
         DataStream.WriteLine(CurrentAI
                              + "," + FightRecorder.NameAccessor
                              + "," + FightRecorder.GroupAccessor
@@ -384,10 +384,11 @@ public class SimControl : MonoBehaviour
                              + "," + FightRecorder.CalculateAVGRoundTime()
                              + "," + FightRecorder.GetAbilityUsage("Tweet")
                              + "," + FightRecorder.GetAbilityUsage("Light-Skin Stare")
-                             + "," + FightRecorder.GetAbilityUsage("Fact Check")
+                             + "," + FightRecorder.GetAbilityUsage("Fact-Check")
                              + "," + FightRecorder.GetAbilityUsage("Cancel")
-                             + "," + FightRecorder.GetAbilityUsage("OK BOOMER!!!"));
-        //Reset the telemetry counters
+                             + "," + FightRecorder.GetAbilityUsage("OK BOOMER!!!")
+                             + "," + FightRecorder.CalculateRoundRatings());
+        // Reset the telemetry counters
         Victories = 0;
         Defeats = 0;
         DamageDone = 0;
@@ -702,7 +703,7 @@ public class SimControl : MonoBehaviour
             Instantiate(EnemyTypePrefabs[FightCount - 6], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[FightCount - 6], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
             FightRecorder.NameAccessor = "Group";
-            FightRecorder.GroupAccessor = (FightCount - 6).ToString();
+            FightRecorder.GroupAccessor = "3 X " + EnemyTypePrefabs[FightCount - 6].name;
 
         }
         // Mixed Preset Fights using Random AI
@@ -740,7 +741,7 @@ public class SimControl : MonoBehaviour
             Instantiate(EnemyTypePrefabs[FightCount - 24], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
 
             FightRecorder.NameAccessor = "Group";
-            FightRecorder.GroupAccessor = (FightCount - 24).ToString();
+            FightRecorder.GroupAccessor = "3 X " + EnemyTypePrefabs[FightCount - 24].name;
         }
         // Mixed Preset Fights using Smart AI
         else
@@ -767,7 +768,7 @@ public class SimControl : MonoBehaviour
         Player.Initialize();
 
         // Feedback is good...
-        SpawnInfoText("ROUND " + RoundCount); //Look! A string concatenation operator!
+        SpawnInfoText("ROUND " + RoundCount); // Look! A string concatenation operator!
 
         // Reset the round delay timer (and round start flag) for after this new round ends.
         RoundTimer = RoundDelay;

@@ -26,17 +26,25 @@ using UnityEngine.UI; //This is here so we don't have to type out longer names f
 //Remember that the class name MUST be identical to the file name!
 public class HeroAbility : MonoBehaviour
 {
-    //Properties that define the ability's cooldown time, damage done, power used, range, etc.
+    // Properties that define the ability's cooldown time, damage done, power used, range, etc.
     public string AbilityName = string.Empty;
+    public string CatchyOneLiner = string.Empty;
     public float CooldownTime = 1.0f;
+    // The damage done by an ability
     public float DamageDone = 1.0f;
+    // Power used by an ability
     public float PowerUsed = 1.0f;
+    // Maximum range of an ability
     public float MaximumRange = 10.0f;
+    // Mark an ability as capable of stunning.
     public bool Stuns = false;
     public float StunTimer = 0.0f;
+    // Mark an ability as a finisher
     public bool Finisher = false;
+    // Mark an ability as area of effect
     public bool AoE = false;
-    public bool Inactive = false; //Make an ability inactive to temporarily or permanently not have it used.
+    // Make an ability inactive to temporarily or permanently not have it used.
+    public bool Inactive = false; 
     
   
 
@@ -143,22 +151,27 @@ public class HeroAbility : MonoBehaviour
 
         if (AoE == true)
         {
-            GameObject[] gos = GameObject.FindGameObjectsWithTag("Enemy");
+            var enemies = FindObjectsOfType<Enemy>();
 
-            if (gos.Length == 0)
+            if (enemies.Length == 0)
             {
                 return false;
             }
 
-            foreach (GameObject item in gos)
+            foreach (Enemy item in enemies)
             {
-                Enemy enemy = item.GetComponent<Enemy>();
-                enemy.TakeDamage(DamageDone);
+                item.TakeDamage(DamageDone);
             }
-
-            Text BoomerText = Object.Instantiate(SimControl.InfoTextPrefab, transform.position, Quaternion.identity, SimControl.Canvas.transform).GetComponent<Text>();
-            BoomerText.text = "OK BOOMER!!!";
         }
+
+        if (AbilityName == "Light-Skin Stare")
+        {
+            Text Exclamation = Object.Instantiate(SimControl.InfoTextPrefab, ParentHero.Target.transform.position, Quaternion.identity, SimControl.Canvas.transform).GetComponent<Text>();
+            Exclamation.text = "Oh No He's Hot!";
+        }
+
+        Text OneLiner = Object.Instantiate(SimControl.InfoTextPrefab, ParentHero.transform.position, Quaternion.identity, SimControl.Canvas.transform).GetComponent<Text>();
+        OneLiner.text = CatchyOneLiner;
 
         FightRecorder.SetAbilityUsage(AbilityName);
 

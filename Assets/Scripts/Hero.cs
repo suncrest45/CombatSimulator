@@ -31,12 +31,12 @@ public class Hero : MonoBehaviour
     public float OptimalRange = 5.0f;
 
     [HideInInspector]
-    public float HitPoints = 200; //Current hit points
+    public float HitPoints = 200; // Current hit points
     [HideInInspector]
-    public float Power = 40; //Current power
+    public float Power = 60; // Current power
 
     [HideInInspector]
-    public Enemy Target; //Current target enemy.
+    public Enemy Target; // Current target enemy.
 
     //References to the health and power UI bars, so we don't have to look them up all the time.
     [HideInInspector]
@@ -214,39 +214,55 @@ public class Hero : MonoBehaviour
     // Smart AI
     public void SmartAI()
     {
+        if (Target == null)
+        {
+            return;
+        }
+
+        var enemies = FindObjectsOfType<Enemy>();
+
+        if (enemies.Length > 1)
+        {
+            UseAbility(5);
+        }
+
+
         // Keep a record of target distance
-        float distanceToTarget = transform.position.x - Target.transform.position.x;
+        float distanceToTarget = Mathf.Abs(transform.position.x - Target.transform.position.x);
 
 
         // Spam the tweet ability
         UseAbility(0);
 
         // If an enemy is very close to the player use the light skin stare
-        if ((transform.position.x - Target.transform.position.x) < OptimalRange)
+        if (distanceToTarget < OptimalRange)
         {
             UseAbility(1);
         }
 
-        // If the target is below 20% hit points, go in for the finisher.
-        if (Target.HitPoints < (0.2 * Target.MaxHitPoints) && distanceToTarget > Abilities[3].MaximumRange)
+        if (Target)
         {
-            // Get the player in range to use the finisher
-            float newX = transform.position.x;
-            newX += MoveSpeed * SimControl.DT;
-            // Don't go past the edge of the arena.
-            newX = Mathf.Clamp(newX, -SimControl.EdgeDistance, SimControl.EdgeDistance);
-            // Update the transform.
-            transform.position = new Vector3(newX, transform.position.y, transform.position.z);
-
-            // When in range use the ability
-            if (distanceToTarget <= Abilities[3].MaximumRange)
+            // If the target is below 20% hit points, go in for the finisher.
+            if (Target.HitPoints < (0.2 * Target.MaxHitPoints) && distanceToTarget > Abilities[3].MaximumRange)
             {
-                UseAbility(3);
+                // Get the player in range to use the finisher
+                float newX = transform.position.x;
+                newX += MoveSpeed * SimControl.DT;
+                // Don't go past the edge of the arena.
+                newX = Mathf.Clamp(newX, -SimControl.EdgeDistance, SimControl.EdgeDistance);
+                // Update the transform.
+                transform.position = new Vector3(newX, transform.position.y, transform.position.z);
+
+                // When in range use the ability
+                if (distanceToTarget <= Abilities[3].MaximumRange)
+                {
+                    UseAbility(3);
+                }
             }
         }
     }
 
-    //Use a given amount of power.
+    // Use a given amount of power.
     public void UsePower(float power)
     {
         //Make sure power does not go negative (or above max, becaust the "power" could be negative).
@@ -270,7 +286,7 @@ public class Hero : MonoBehaviour
             //Uses the "empty string plus number" trick to make it a string.
             damageText.text = "" + Mathf.Floor(damage);
         }
-        //Return true if dead.
+        // Return true if dead.
         return (HitPoints <= 0.0f);
     }
 
