@@ -682,13 +682,15 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '0s Cooldown
+  m_Text: '10s Cooldown
 
-    300 Damage
+    100 Damage
 
-    150 Rizz
+    50 Rizz
 
-    AoE'
+    AoE & Stuns
+
+    30 Range'
 --- !u!222 &398758000
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1416,9 +1418,9 @@ MonoBehaviour:
 
     50 Damage
 
-    50 Rizz
+    25 Rizz
 
-    Enemy <= 20% health'
+    4 Range'
 --- !u!222 &729799492
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2037,7 +2039,7 @@ MonoBehaviour:
 
     2 Damage
 
-    1 Rizz
+    +5 Rizz
 
     30 Range'
 --- !u!222 &1047618469
@@ -2266,8 +2268,8 @@ MonoBehaviour:
   DamageDone: 100
   PowerUsed: 50
   MaximumRange: 30
-  Stuns: 0
-  StunTimer: 0
+  Stuns: 1
+  StunTimer: 5
   Finisher: 0
   AoE: 1
   Inactive: 0
