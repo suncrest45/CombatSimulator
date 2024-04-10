@@ -105,7 +105,6 @@ MonoBehaviour:
   MoveSpeed: 1
   OptimalRange: 10
   StunTimer: 0
-  EnemyName: NFTBro
   HitPoints: 200
   Target: {fileID: 0}
   HealthBar: {fileID: 0}
@@ -743,13 +742,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b79a8d4f3daf33d40b36b8c4961690e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CooldownTime: 10
+  CooldownTime: 6
   DamageDone: 0
   MaximumRange: 10
   RizzSteal: 1
   summoner: 0
   Inactive: 0
-  RizzToSteal: 5
+  RizzToSteal: 10
   CooldownLeft: 0
   CooldownBar: {fileID: 0}
   ParentEnemy: {fileID: 0}

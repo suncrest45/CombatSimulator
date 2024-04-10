@@ -92,15 +92,6 @@ public class SimControl : MonoBehaviour
     public static GameObject[] EnemyTypePrefabs = new GameObject[6];
     public HeroAbility[] Abilities = new HeroAbility[5];
 
-    public enum EnemyType
-    {
-        SoyWojack,
-        KeyboardWarrior,
-        GymBro,
-        NFTBro,
-        AIBro,
-        Rival
-    }
 
     //Start is called before the first frame update
     void Start()
@@ -301,7 +292,12 @@ public class SimControl : MonoBehaviour
             {
                 SpawnInfoText("Cringe...");
                 Defeats++;
-                FightRecorder.LossesAcessor += Defeats;
+                FightRecorder.LossesAcessor = Defeats;
+                var enemies = FindObjectsOfType<Enemy>();
+                foreach (Enemy item in enemies)
+                {
+                    FightRecorder.m_Ratings[RoundCount] += item.HitPoints;
+                }
             }
             return true;
         }
@@ -315,6 +311,7 @@ public class SimControl : MonoBehaviour
                 SpawnInfoText("VICTORY!!!");
                 Victories++;
                 FightRecorder.WinsAccessor = Victories;
+                FightRecorder.m_Ratings[RoundCount] = Player.HitPoints;
             }
             return true;
         }
@@ -473,7 +470,7 @@ public class SimControl : MonoBehaviour
     {
         EnemyTypePrefabs[0] = Resources.Load("Prefabs/MeleeEnemy") as GameObject;
         EnemyTypePrefabs[1] = Resources.Load("Prefabs/SniperEnemy") as GameObject;
-        EnemyTypePrefabs[2] = Resources.Load("Prefabs/EliteEnemy") as GameObject;
+        EnemyTypePrefabs[2] = Resources.Load("Prefabs/MeleeEliteEnemy") as GameObject;
         EnemyTypePrefabs[3] = Resources.Load("Prefabs/NFTBroEnemy") as GameObject;
         EnemyTypePrefabs[4] = Resources.Load("Prefabs/AIBroEnemy") as GameObject;
         EnemyTypePrefabs[5] = Resources.Load("Prefabs/RivalEnemy") as GameObject;
@@ -680,7 +677,7 @@ public class SimControl : MonoBehaviour
         AutoMode = true;
         //It's the start of a fight, so start a new round.
         if (RoundCount == 0)
-            telemetryModeRounds();
+            TelemetryModeRounds();
 
         RoundOver = IsRoundOver();
         // The round isn't over, so run the simulation (all the logic is in the updates of other classes).
@@ -693,10 +690,10 @@ public class SimControl : MonoBehaviour
         else if (RoundTimer > 0.0f) //The round is over, but this is the delay before a new round.
             RoundTimer -= DT; //Update the round delay timer.
         else //Time for a new round.
-            telemetryModeRounds();
+            TelemetryModeRounds();
     }
 
-    void telemetryModeRounds()
+    void TelemetryModeRounds()
     {
         RoundCount++;
         ClearEnemies();

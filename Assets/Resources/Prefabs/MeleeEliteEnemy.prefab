@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 4478826129968344886}
   - component: {fileID: 4478826129968344884}
   m_Layer: 0
-  m_Name: EliteEnemy
+  m_Name: MeleeEliteEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -201,9 +201,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHitPoints: 100
   MoveSpeed: 2
-  OptimalRange: 3
+  OptimalRange: 1.5
   StunTimer: 0
-  EnemyName: GymBro
   HitPoints: 200
   Target: {fileID: 0}
   HealthBar: {fileID: 0}
@@ -254,7 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b79a8d4f3daf33d40b36b8c4961690e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CooldownTime: 1
+  CooldownTime: 2
   DamageDone: 5
   MaximumRange: 3
   RizzSteal: 0
@@ -407,8 +406,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b79a8d4f3daf33d40b36b8c4961690e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CooldownTime: 10
-  DamageDone: 50
+  CooldownTime: 3
+  DamageDone: 40
   MaximumRange: 2
   RizzSteal: 0
   summoner: 0

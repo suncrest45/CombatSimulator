@@ -496,7 +496,6 @@ MonoBehaviour:
   MoveSpeed: 0.75
   OptimalRange: 10
   StunTimer: 0
-  EnemyName: KeyboardWarrior
   HitPoints: 200
   Target: {fileID: 0}
   HealthBar: {fileID: 0}
@@ -548,7 +547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CooldownTime: 3
-  DamageDone: 15
+  DamageDone: 10
   MaximumRange: 12
   RizzSteal: 0
   summoner: 0

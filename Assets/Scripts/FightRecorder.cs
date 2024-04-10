@@ -17,7 +17,7 @@ public static class FightRecorder
     private static Dictionary<string, float> m_AbilityPercentage;
     private static int m_Rounds;
     private static float m_DamageDone;
-    private static float[] m_Ratings;
+    public static float[] m_Ratings;
 
     // Constructor for the fight recorder class
     static FightRecorder()
@@ -38,7 +38,7 @@ public static class FightRecorder
     }
 
     // Calculate The Win Percentage
-    public static float CalculateWinPercentage() { return (m_WinPercentage = (m_Wins / m_Rounds) * 100.0f); }
+    public static float CalculateWinPercentage() { return m_WinPercentage = (WinsAccessor / m_Rounds) * 100.0f; }
 
     // Calculate average round time
     public static float CalculateAVGRoundTime()
@@ -83,6 +83,8 @@ public static class FightRecorder
         set => m_GroupType = value;
     }
 
+    
+
    
     public static void CalculateAbilityUsage()
     {
@@ -94,7 +96,7 @@ public static class FightRecorder
 
     public static void SetAbilityUsage(string AbilityName) { m_AbilityUsage[AbilityName] += 1; }
 
-    public static float GetAbilityUsage(string AbilityName) {  return m_AbilityPercentage[AbilityName]; }
+    public static int GetAbilityUsage(string AbilityName) {  return m_AbilityUsage[AbilityName]; }
 
     public static float CalculateRoundRatings()
     {
