@@ -199,9 +199,27 @@ public class SimControl : MonoBehaviour
             }
         }
 
-        //If the T key is pressed, toggle Mixed mode on or off.
+        // If the T key is pressed, toggle Telemetry mode on or off.
         if (Input.GetKeyDown(KeyCode.T) == true)
-            TelemetryMode = !TelemetryMode;
+        {
+            if (TelemetryMode == false)
+            {
+                TelemetryMode = !TelemetryMode;
+                GroupMode = false;
+                StandardMode = false;
+                MixedMode = false;
+                AutoMode = false;
+                FastMode = false;
+                NewFight();
+            }
+            else
+            {
+                TelemetryMode = !TelemetryMode;
+                StandardMode = true;
+                NewFight();
+            }
+        }
+            
 
         //If the S key is pressed, toggle Standard mode on or off.
         if (Input.GetKeyDown(KeyCode.S) == true)
@@ -690,24 +708,24 @@ public class SimControl : MonoBehaviour
 
 
         // Single Enemy Fights using Random AI
-        if (FightCount < 6)
+        if (FightCount <= 6)
         {
-            Instantiate(EnemyTypePrefabs[FightCount], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
-            FightRecorder.NameAccessor = EnemyTypePrefabs[FightCount].name;
+            Instantiate(EnemyTypePrefabs[FightCount - 1], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
+            FightRecorder.NameAccessor = EnemyTypePrefabs[FightCount - 1].name;
             FightRecorder.GroupAccessor = "N/A";
         }
         // Group Fights using Random AI
-        else if (FightCount < 12 )
+        else if (FightCount <= 12 )
         {
-            Instantiate(EnemyTypePrefabs[FightCount - 6], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
-            Instantiate(EnemyTypePrefabs[FightCount - 6], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
-            Instantiate(EnemyTypePrefabs[FightCount - 6], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
+            Instantiate(EnemyTypePrefabs[FightCount - 7], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
+            Instantiate(EnemyTypePrefabs[FightCount - 7], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
+            Instantiate(EnemyTypePrefabs[FightCount - 7], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
             FightRecorder.NameAccessor = "Group";
-            FightRecorder.GroupAccessor = "3 X " + EnemyTypePrefabs[FightCount - 6].name;
+            FightRecorder.GroupAccessor = "3 X " + EnemyTypePrefabs[FightCount - 7].name;
 
         }
         // Mixed Preset Fights using Random AI
-        else if(FightCount < 18)
+        else if(FightCount <= 18)
         {
             // An array for the mixed preset
             int[,] TelemetryMixedPresets = {
@@ -719,29 +737,29 @@ public class SimControl : MonoBehaviour
                 {5, 5, 5 },
             };
 
-            Instantiate(EnemyTypePrefabs[TelemetryMixedPresets[FightCount - 12, 0]], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
-            Instantiate(EnemyTypePrefabs[TelemetryMixedPresets[FightCount - 12, 1]], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
-            Instantiate(EnemyTypePrefabs[TelemetryMixedPresets[FightCount - 12, 2]], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
+            Instantiate(EnemyTypePrefabs[TelemetryMixedPresets[FightCount - 13, 0]], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
+            Instantiate(EnemyTypePrefabs[TelemetryMixedPresets[FightCount - 13, 1]], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
+            Instantiate(EnemyTypePrefabs[TelemetryMixedPresets[FightCount - 13, 2]], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
 
             FightRecorder.NameAccessor = "Mixed";
-            FightRecorder.GroupAccessor = (FightCount - 12).ToString();
+            FightRecorder.GroupAccessor = (FightCount - 13).ToString();
         }
         // Single Enemy Fights using Smart AI
-        else if (FightCount < 24)
+        else if (FightCount <= 24)
         {
-            Instantiate(EnemyTypePrefabs[FightCount - 18], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
-            FightRecorder.NameAccessor = EnemyTypePrefabs[FightCount - 18].name;
+            Instantiate(EnemyTypePrefabs[FightCount - 19], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
+            FightRecorder.NameAccessor = EnemyTypePrefabs[FightCount - 19].name;
             FightRecorder.GroupAccessor = "N/A";
         }
         // Gorup Fights using Smart AI
-        else if (FightCount < 30)
+        else if (FightCount <= 30)
         {
-            Instantiate(EnemyTypePrefabs[FightCount - 24], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
-            Instantiate(EnemyTypePrefabs[FightCount - 24], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
-            Instantiate(EnemyTypePrefabs[FightCount - 24], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
+            Instantiate(EnemyTypePrefabs[FightCount - 25], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
+            Instantiate(EnemyTypePrefabs[FightCount - 25], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
+            Instantiate(EnemyTypePrefabs[FightCount - 25], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
 
             FightRecorder.NameAccessor = "Group";
-            FightRecorder.GroupAccessor = "3 X " + EnemyTypePrefabs[FightCount - 24].name;
+            FightRecorder.GroupAccessor = "3 X " + EnemyTypePrefabs[FightCount - 25].name;
         }
         // Mixed Preset Fights using Smart AI
         else
@@ -756,12 +774,12 @@ public class SimControl : MonoBehaviour
                 {5, 5, 5 },
             };
 
-            Instantiate(EnemyTypePrefabs[TelemetryMixedPresets[FightCount - 30, 0]], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
-            Instantiate(EnemyTypePrefabs[TelemetryMixedPresets[FightCount - 30, 1]], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
-            Instantiate(EnemyTypePrefabs[TelemetryMixedPresets[FightCount - 30, 2]], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
+            Instantiate(EnemyTypePrefabs[TelemetryMixedPresets[FightCount - 31, 0]], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
+            Instantiate(EnemyTypePrefabs[TelemetryMixedPresets[FightCount - 31, 1]], new Vector3(StartingX + 1, 0, 0), Quaternion.Euler(0, 0, 90), null);
+            Instantiate(EnemyTypePrefabs[TelemetryMixedPresets[FightCount - 31, 2]], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
 
             FightRecorder.NameAccessor = "Mixed";
-            FightRecorder.GroupAccessor = (FightCount - 30).ToString();
+            FightRecorder.GroupAccessor = (FightCount - 31).ToString();
         }
 
         // Call the Initialize() functions for the player.

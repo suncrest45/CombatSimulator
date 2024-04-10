@@ -146,7 +146,10 @@ public class HeroAbility : MonoBehaviour
 
         if (Stuns == true)
         {
-            ParentHero.Target.StunTimer = StunTimer;
+            if (ParentHero.Target)
+            {
+                ParentHero.Target.StunTimer = StunTimer;
+            }
         }
 
         if (AoE == true)
