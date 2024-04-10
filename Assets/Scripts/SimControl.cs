@@ -155,6 +155,8 @@ public class SimControl : MonoBehaviour
                 TelemetryMode = false;
                 AutoMode = false;
                 FastMode = false;
+                Rounds = 6;
+                Fights = 1;
                 NewFight();
             }
             else
@@ -177,6 +179,8 @@ public class SimControl : MonoBehaviour
                 TelemetryMode = false;
                 AutoMode = false;
                 FastMode = false;
+                Rounds = 6;
+                Fights = 1;
                 NewFight();
             }
             else
@@ -198,6 +202,8 @@ public class SimControl : MonoBehaviour
                 MixedMode = false;
                 AutoMode = false;
                 FastMode = false;
+                Rounds = 10;
+                Fights = 36;
                 NewFight();
             }
             else
@@ -220,6 +226,8 @@ public class SimControl : MonoBehaviour
                 MixedMode = false;
                 GroupMode = false;
                 TelemetryMode = false;
+                Fights = 1;
+                Rounds = 6;
                 NewFight() ;
             }
         }
@@ -331,10 +339,10 @@ public class SimControl : MonoBehaviour
             return;
         }
 
-        //Spawn enemies by calling the Unity engine function Instantiate().
-        //Pass in the appropriate prefab, its position, its rotation (90 degrees),
-        //and its parent (none).
-        //You'll really want these to be an array/dictionary of prefabs eventually.
+        // Spawn enemies by calling the Unity engine function Instantiate().
+        // Pass in the appropriate prefab, its position, its rotation (90 degrees),
+        // and its parent (none).
+        // You'll really want these to be an array/dictionary of prefabs eventually.
         if (RoundCount % 6 == 1)
             Instantiate(EnemyTypePrefabs[0], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
         else if (RoundCount % 6 == 2)
@@ -362,18 +370,18 @@ public class SimControl : MonoBehaviour
             Instantiate(EnemyTypePrefabs[2], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[2], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
         }
-        //Note that this just cycles through enemy types/groups, but you'll need more structure than this.
-        //Each fight should be one AI type against one enemy type multiple times. And then each AI type
-        //against a group of the same type multiple times. And then each AI type against a mixed group
-        //multiple times. Group mode and mixed mode will require different logic, etc.
+        // Note that this just cycles through enemy types/groups, but you'll need more structure than this.
+        // Each fight should be one AI type against one enemy type multiple times. And then each AI type
+        // against a group of the same type multiple times. And then each AI type against a mixed group
+        // multiple times. Group mode and mixed mode will require different logic, etc.
 
-        //Call the Initialize() functions for the player.
+        // Call the Initialize() functions for the player.
         Player.Initialize();
 
-        //Feedback is good...
+        // Feedback is good...
         SpawnInfoText("ROUND " + RoundCount); //Look! A string concatenation operator!
 
-        //Reset the round delay timer (and round start flag) for after this new round ends.
+        // Reset the round delay timer (and round start flag) for after this new round ends.
         RoundTimer = RoundDelay;
         RoundStart = true;
     }
@@ -409,7 +417,7 @@ public class SimControl : MonoBehaviour
         // Reset the recorder for each fight
         FightRecorder.InitRecorder(Abilities, Rounds);
 
-        //After the first fight (which is random), just spam a single key for each fight.
+        // After the first fight (which is random), just spam a single key for each fight.
         if (!TelemetryMode)
         {
             CurrentAI = "Spam" + FightCount;
@@ -496,8 +504,8 @@ public class SimControl : MonoBehaviour
 
     void GroupSim()
     {
-        //It's the start of a fight, so start a new round.
-        if (GroupModeRounds == 0)
+        // It's the start of a fight, so start a new round.
+        if (RoundCount == 0)
             RandomGroupRound();
 
         RoundOver = IsRoundOver();
@@ -511,13 +519,13 @@ public class SimControl : MonoBehaviour
 
     void RandomGroupRound()
     {
-        GroupModeRounds++;
+        RoundCount++;
 
         //Clear out any remaining enemies.
         ClearEnemies();
 
         //The whole fight is over, so start a new one.
-        if (GroupModeRounds > 18)
+        if (RoundCount > 1)
         {
             GroupMode = false;
             StandardMode = true;
@@ -526,7 +534,7 @@ public class SimControl : MonoBehaviour
         }
 
         // Three weak
-        if (GroupModeRounds % 6 == 1)
+        if (RoundCount % 6 == 1)
         {
             Instantiate(EnemyTypePrefabs[0], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[0], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
@@ -534,7 +542,7 @@ public class SimControl : MonoBehaviour
         }
 
         // Two ranged & 1 rival
-        else if (GroupModeRounds % 6 == 2)
+        else if (RoundCount % 6 == 2)
         {
             Instantiate(EnemyTypePrefabs[1], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[1], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
@@ -542,7 +550,7 @@ public class SimControl : MonoBehaviour
         }
 
         // Brute and two ranged.
-        else if (GroupModeRounds % 6 == 3)
+        else if (RoundCount % 6 == 3)
         {
             Instantiate(EnemyTypePrefabs[2], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[2], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
@@ -550,7 +558,7 @@ public class SimControl : MonoBehaviour
         }
 
         // Two brutes & one support.
-        else if (GroupModeRounds % 6 == 4)
+        else if (RoundCount % 6 == 4)
         {
             //Adjust the starting X/Y a bit for groups.
             Instantiate(EnemyTypePrefabs[3], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
@@ -558,7 +566,7 @@ public class SimControl : MonoBehaviour
             Instantiate(EnemyTypePrefabs[3], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
         }
 
-        else if (GroupModeRounds % 6 == 5)
+        else if (RoundCount % 6 == 5)
         {
             //Adjust the starting X/Y a bit for groups.
             Instantiate(EnemyTypePrefabs[4], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
@@ -577,7 +585,7 @@ public class SimControl : MonoBehaviour
         Player.Initialize();
 
         //Feedback is good...
-        SpawnInfoText("ROUND " + GroupModeRounds); //Look! A string concatenation operator!
+        SpawnInfoText("ROUND " + RoundCount); //Look! A string concatenation operator!
 
         //Reset the round delay timer (and round start flag) for after this new round ends.
         RoundTimer = RoundDelay;
@@ -587,7 +595,7 @@ public class SimControl : MonoBehaviour
     void MixedSim()
     {
         //It's the start of a fight, so start a new round.
-        if (MixedModeRounds == 0)
+        if (RoundCount == 0)
             MixedRounds();
 
         RoundOver = IsRoundOver();
@@ -601,12 +609,12 @@ public class SimControl : MonoBehaviour
 
     void MixedRounds()
     {
-        MixedModeRounds++;
+        RoundCount++;
         //Clear out any remaining enemies.
         ClearEnemies();
 
         //The whole fight is over, so start a new one.
-        if (MixedModeRounds > 6)
+        if (RoundCount > 6)
         {
             MixedMode = false;
             StandardMode = true;
@@ -615,7 +623,7 @@ public class SimControl : MonoBehaviour
         }
 
         // Three weak
-        if (MixedModeRounds % 6 == 1)
+        if (RoundCount % 6 == 1)
         {
             Instantiate(EnemyTypePrefabs[0], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[1], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
@@ -623,7 +631,7 @@ public class SimControl : MonoBehaviour
         }
         
         // Two ranged & 1 rival
-        else if (MixedModeRounds % 6 == 2)
+        else if (RoundCount % 6 == 2)
         {
             Instantiate(EnemyTypePrefabs[1], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[5], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
@@ -631,7 +639,7 @@ public class SimControl : MonoBehaviour
         }
         
         // Brute and two ranged.
-        else if (MixedModeRounds % 6 == 3)
+        else if (RoundCount % 6 == 3)
         {
             Instantiate(EnemyTypePrefabs[3], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[2], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
@@ -639,7 +647,7 @@ public class SimControl : MonoBehaviour
         }
         
         // Two brutes & one support.
-        else if (MixedModeRounds % 6 == 4)
+        else if (RoundCount % 6 == 4)
         {
             //Adjust the starting X/Y a bit for groups.
             Instantiate(EnemyTypePrefabs[4], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
@@ -647,14 +655,14 @@ public class SimControl : MonoBehaviour
             Instantiate(EnemyTypePrefabs[2], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
         }
 
-        else if (MixedModeRounds % 6 == 5)
+        else if (RoundCount % 6 == 5)
         {
             //Adjust the starting X/Y a bit for groups.
             Instantiate(EnemyTypePrefabs[5], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[3], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[2], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
         }
-        else if (MixedModeRounds % 6 == 0)
+        else if (RoundCount % 6 == 0)
         {
             //Adjust the starting X/Y a bit for groups.
             Instantiate(EnemyTypePrefabs[5], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
@@ -666,7 +674,7 @@ public class SimControl : MonoBehaviour
         Player.Initialize();
 
         //Feedback is good...
-        SpawnInfoText("ROUND " + MixedModeRounds); //Look! A string concatenation operator!
+        SpawnInfoText("ROUND " + RoundCount); //Look! A string concatenation operator!
 
         //Reset the round delay timer (and round start flag) for after this new round ends.
         RoundTimer = RoundDelay;

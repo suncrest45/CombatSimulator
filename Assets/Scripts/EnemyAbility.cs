@@ -132,8 +132,10 @@ public class EnemyAbility : MonoBehaviour
             ParentEnemy.Target.RizzStolen(RizzToSteal);
         }
 
+        // Summons a cheap copy of an enemy
         if (summoner)
         {
+            ParentEnemy.Target.Target = ParentEnemy;
             Instantiate(SimControl.EnemyTypePrefabs[Random.Range(6,12)], new Vector3(SimControl.StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
         }
 
