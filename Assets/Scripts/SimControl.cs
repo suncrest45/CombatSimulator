@@ -86,10 +86,7 @@ public class SimControl : MonoBehaviour
 	//have to load them each time.
     public static GameObject InfoTextPrefab;
     public static GameObject StaticInfoTextPrefab;
-    public static GameObject EnemyType1Prefab; //Should really be an array or dictionary.
-    public static GameObject EnemyType2Prefab;
-    public static GameObject EnemyType3Prefab;
-    public static GameObject[] EnemyTypePrefabs = new GameObject[6];
+    public static GameObject[] EnemyTypePrefabs = new GameObject[12];
     public HeroAbility[] Abilities = new HeroAbility[5];
 
 
@@ -98,7 +95,7 @@ public class SimControl : MonoBehaviour
     {
         //Create a comma-separated value file to output telemetry data.
         //This can just then be directly opened in Excel.
-        DataStream = new StreamWriter("FightData.csv", true);
+        DataStream = new StreamWriter("FightData" + DateTime.Now.ToString("yyyyMMdd_HHmmss") +".csv", true);
         //Write some headers for our columns. You'll need more columns than this eventually.
         DataStream.WriteLine("AI TYPE,Enemy Type,Group,VICTORIES,DEFEATS,Win%,DPS,ROUND LENGTH,Tweet,Light-Skin Stare,Fact-Check,Cancel,OK BOOMER!!!,Ratings,Ratings Difference,");
 
@@ -474,6 +471,12 @@ public class SimControl : MonoBehaviour
         EnemyTypePrefabs[3] = Resources.Load("Prefabs/NFTBroEnemy") as GameObject;
         EnemyTypePrefabs[4] = Resources.Load("Prefabs/AIBroEnemy") as GameObject;
         EnemyTypePrefabs[5] = Resources.Load("Prefabs/RivalEnemy") as GameObject;
+        EnemyTypePrefabs[6] = Resources.Load("Prefabs/WeakMeleeEnemy") as GameObject;
+        EnemyTypePrefabs[7] = Resources.Load("Prefabs/WeakSniper") as GameObject;
+        EnemyTypePrefabs[8] = Resources.Load("Prefabs/MeleeElite(Skipped)") as GameObject;
+        EnemyTypePrefabs[9] = Resources.Load("Prefabs/FailedNFTBro") as GameObject;
+        EnemyTypePrefabs[10] = Resources.Load("Prefabs/NULLReferenceError") as GameObject;
+        EnemyTypePrefabs[11] = Resources.Load("Prefabs/Berserker") as GameObject;
     }
 
     void StandardSim()
