@@ -293,7 +293,7 @@ public class SimControl : MonoBehaviour
                 var enemies = FindObjectsOfType<Enemy>();
                 foreach (Enemy item in enemies)
                 {
-                    FightRecorder.m_Ratings[RoundCount] += item.HitPoints;
+                    FightRecorder.m_Ratings[RoundCount - 1] += item.HitPoints;
                 }
             }
             return true;
@@ -308,7 +308,7 @@ public class SimControl : MonoBehaviour
                 SpawnInfoText("VICTORY!!!");
                 Victories++;
                 FightRecorder.WinsAccessor = Victories;
-                FightRecorder.m_Ratings[RoundCount] = Player.HitPoints;
+                FightRecorder.m_Ratings[RoundCount - 1] = Player.HitPoints;
             }
             return true;
         }
