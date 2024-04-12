@@ -468,16 +468,24 @@ public class SimControl : MonoBehaviour
     //Destroy all the enemy game objects.
     void ClearEnemies()
     {
-        //Find all the game objects that have an Enemy component.
+        // Find all the game objects that have an Enemy component.
         var enemies = FindObjectsOfType<Enemy>();
-        if (enemies.Length == 0) //Didn't find any.
+
+        // Didn't find any.
+        if (enemies.Length == 0)
+        {
             return;
-        foreach (Enemy enemy in enemies) //A foreach loop! Fancy...
+        }
+
+        // A foreach loop! Fancy...
+        foreach (Enemy enemy in enemies)
+        {
             Destroy(enemy.gameObject);
+        }  
     }
 
-    //Spawn text at the center of the screen.
-    //If set to static, that just means it doesn't move.
+    // Spawn text at the center of the screen.
+    // If set to static, that just means it doesn't move.
     void SpawnInfoText(string text, bool isStatic = false)
     {
         SpawnInfoText(new Vector3(0, 0, 0), text, isStatic);
@@ -569,7 +577,7 @@ public class SimControl : MonoBehaviour
             Instantiate(EnemyTypePrefabs[0], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[0], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
 
-            FightRecorder.NameAccessor = "N/A";
+            FightRecorder.NameAccessor = "Group";
             FightRecorder.GroupAccessor = "3 x " + EnemyTypePrefabs[0].name;
         }
 
@@ -580,7 +588,7 @@ public class SimControl : MonoBehaviour
             Instantiate(EnemyTypePrefabs[1], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[1], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
 
-            FightRecorder.NameAccessor = "N/A";
+            FightRecorder.NameAccessor = "Group";
             FightRecorder.GroupAccessor = "3 x " + EnemyTypePrefabs[1].name;
         }
 
@@ -591,7 +599,7 @@ public class SimControl : MonoBehaviour
             Instantiate(EnemyTypePrefabs[2], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[2], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
 
-            FightRecorder.NameAccessor = "N/A";
+            FightRecorder.NameAccessor = "Group";
             FightRecorder.GroupAccessor = "3 x " + EnemyTypePrefabs[2].name;
         }
 
@@ -603,7 +611,7 @@ public class SimControl : MonoBehaviour
             Instantiate(EnemyTypePrefabs[3], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[3], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
 
-            FightRecorder.NameAccessor = "N/A";
+            FightRecorder.NameAccessor = "Group";
             FightRecorder.GroupAccessor = "3 x " + EnemyTypePrefabs[3].name;
         }
 
@@ -614,7 +622,7 @@ public class SimControl : MonoBehaviour
             Instantiate(EnemyTypePrefabs[4], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[4], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
 
-            FightRecorder.NameAccessor = "N/A";
+            FightRecorder.NameAccessor = "Group";
             FightRecorder.GroupAccessor = "3 x " + EnemyTypePrefabs[4].name;
         }
         else if (RoundCount % 6 == 0)
@@ -624,7 +632,7 @@ public class SimControl : MonoBehaviour
             Instantiate(EnemyTypePrefabs[5], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[5], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
 
-            FightRecorder.NameAccessor = "N/A";
+            FightRecorder.NameAccessor = "Group";
             FightRecorder.GroupAccessor = "3 x " + EnemyTypePrefabs[5].name;
         }
 
@@ -675,6 +683,9 @@ public class SimControl : MonoBehaviour
             Instantiate(EnemyTypePrefabs[0], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[1], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[2], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
+
+            FightRecorder.NameAccessor = "Mixed";
+            FightRecorder.GroupAccessor = "1 x " + EnemyTypePrefabs[0].name + " 1 x " + EnemyTypePrefabs[1].name + " 1 x " + EnemyTypePrefabs[2].name;
         }
         
         // Two ranged & 1 rival
@@ -683,6 +694,9 @@ public class SimControl : MonoBehaviour
             Instantiate(EnemyTypePrefabs[1], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[5], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[1], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
+
+            FightRecorder.NameAccessor = "Mixed";
+            FightRecorder.GroupAccessor = "2 x " + EnemyTypePrefabs[1].name + " 1 x " + EnemyTypePrefabs[5].name;
         }
         
         // Brute and two ranged.
@@ -691,30 +705,42 @@ public class SimControl : MonoBehaviour
             Instantiate(EnemyTypePrefabs[3], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[2], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[1], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
+
+            FightRecorder.NameAccessor = "Mixed";
+            FightRecorder.GroupAccessor = "1 x " + EnemyTypePrefabs[3].name + " 1 x " + EnemyTypePrefabs[2].name + " 1 x " + EnemyTypePrefabs[1].name;
         }
         
         // Two brutes & one support.
         else if (RoundCount % 6 == 4)
         {
-            //Adjust the starting X/Y a bit for groups.
+            // Adjust the starting X/Y a bit for groups.
             Instantiate(EnemyTypePrefabs[4], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[2], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[2], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
+
+            FightRecorder.NameAccessor = "Mixed";
+            FightRecorder.GroupAccessor = "1 x " + EnemyTypePrefabs[4].name + " 2 x " + EnemyTypePrefabs[2].name;
         }
 
         else if (RoundCount % 6 == 5)
         {
-            //Adjust the starting X/Y a bit for groups.
+            // Adjust the starting X/Y a bit for groups.
             Instantiate(EnemyTypePrefabs[5], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[3], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[2], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
+
+            FightRecorder.NameAccessor = "Mixed";
+            FightRecorder.GroupAccessor = "1 x " + EnemyTypePrefabs[5].name + " 1 x " + EnemyTypePrefabs[3].name + " 1 x " + EnemyTypePrefabs[2].name;
         }
         else if (RoundCount % 6 == 0)
         {
-            //Adjust the starting X/Y a bit for groups.
+            // Adjust the starting X/Y a bit for groups.
             Instantiate(EnemyTypePrefabs[5], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[5], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[5], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
+
+            FightRecorder.NameAccessor = "Mixed";
+            FightRecorder.GroupAccessor = "3 x " + EnemyTypePrefabs[5].name;
         }
 
         // Call the Initialize() functions for the player.
