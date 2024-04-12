@@ -50,61 +50,60 @@ public class SimControl : MonoBehaviour
     public static bool SimOver = false; //Have all the fights been completed?
     public static string CurrentAI = "Random"; //What's the current type of AI for this fight?
 
-    // Mode variables
-    private int GroupModeRounds = 0;
-    private int MixedModeRounds = 0;
-
-    //How many rounds is each "fight"?
+    // How many rounds is each "fight"?
     public int Rounds = 10;
     private int RoundCount = 0;
-    public static bool RoundOver = false; //Did the current round just end?
-    public static bool RoundStart = false; //Is a new round just starting (make sure the player has time to find a target)?
-    //How long a delay between rounds?
+    // Did the current round just end?
+    public static bool RoundOver = false;
+    // Is a new round just starting (make sure the player has time to find a target)?
+    public static bool RoundStart = false; 
+    // How long a delay between rounds?
     public float RoundDelay = 3.0f;
     private float RoundTimer = 3.0f;
 
-    //How far from the center of the screen is the "edge" of the arena?
+    // How far from the center of the screen is the "edge" of the arena?
     public static float EdgeDistance = 8.0f;
-    //How far from the center of the screen do combatants start?
+    // How far from the center of the screen do combatants start?
     public static float StartingX = 5.0f;
  
-    //Telemetry data for an individual fight.
+    // Telemetry data for an individual fight.
     public static int Victories = 0;
     public static int Defeats = 0;
     public static float DamageDone = 0;
     public static float TotalFightTime = 0;
-    public static StreamWriter DataStream; //Stream used to write the data to a file.
+    // Stream used to write the data to a file.
+    public static StreamWriter DataStream; 
 
-    //Need a reference to the player, so we don't have to look it
-    //up each time.
+    // Need a reference to the player, so we don't have to look it
+    // up each time.
     public static Hero Player;
 
-    //We will use the UI canvas a lot, so store a reference to it.
+    // We will use the UI canvas a lot, so store a reference to it.
     public static GameObject Canvas;
 
-	//References for text prefabs and enemy prefabs, so we don't
-	//have to load them each time.
+	// References for text prefabs and enemy prefabs, so we don't
+	// have to load them each time.
     public static GameObject InfoTextPrefab;
     public static GameObject StaticInfoTextPrefab;
     public static GameObject[] EnemyTypePrefabs = new GameObject[12];
     public HeroAbility[] Abilities = new HeroAbility[5];
 
 
-    //Start is called before the first frame update
+    // Start is called before the first frame update
     void Start()
     {
-        //Create a comma-separated value file to output telemetry data.
-        //This can just then be directly opened in Excel.
+        // Create a comma-separated value file to output telemetry data.
+        // This can just then be directly opened in Excel.
         DataStream = new StreamWriter("FightData" + DateTime.Now.ToString("yyyyMMdd_HHmmss") +".csv", true);
-        //Write some headers for our columns. You'll need more columns than this eventually.
+        // Write some headers for our columns. You'll need more columns than this eventually.
         DataStream.WriteLine("AI TYPE,Enemy Type,Group,VICTORIES,DEFEATS,Win%,DPS,ROUND LENGTH,Tweet,Light-Skin Stare,Fact-Check,Cancel,OK BOOMER!!!,Ratings,Ratings Difference,");
 
-        //Get a reference to the canvas (used for UI objects).
+        // Get a reference to the canvas (used for UI objects).
         Canvas = GameObject.Find("Canvas");
 
-        //Get a reference to the player's game object.
-        //Note that we use GetComponent so we don't have to do that
-        //every time we want to access the Hero class functionality.
+        // Get a reference to the player's game object.
+        // Note that we use GetComponent so we don't have to do that
+        // every time we want to access the Hero class functionality.
         Player = GameObject.Find("Hero").GetComponent<Hero>();
 
         //Load all the prefabs we are going to use.
@@ -117,34 +116,36 @@ public class SimControl : MonoBehaviour
         InitialiseEnemies();
     }
 
-    //Update is called once per frame
+    // Update is called once per frame
     void Update()
     {
-        //If the ESC key is pressed, exit the program.
+        // If the ESC key is pressed, exit the program.
         if (Input.GetKeyDown(KeyCode.Escape) == true)
             Application.Quit();
 
-        //The simulation is over, so stop updating.
+        // The simulation is over, so stop updating.
         if (FightCount >= Fights)
         {
-            if (SimOver == false) //Did the simulation just end?
+            // Did the simulation just end?
+            if (SimOver == false) 
             {
                 SimOver = true;
-                DataStream.Close(); //Don't forget to close the stream.
+                // Don't forget to close the stream.
+                DataStream.Close(); 
                 SpawnInfoText("SIMULATION OVER", true);
             }
             return;
         }
 
-        //If the A key is pressed, toggle Auto mode on or off.
+        // If the A key is pressed, toggle Auto mode on or off.
         if (Input.GetKeyDown(KeyCode.A) == true)
             AutoMode = !AutoMode;
 
-        //If the F key is pressed, toggle Fast Auto mode on or off.
+        // If the F key is pressed, toggle Fast Auto mode on or off.
         if (Input.GetKeyDown(KeyCode.F) == true)
             FastMode = !FastMode;
 
-        //If the G key is pressed, toggle Group mode on or off.
+        // If the G key is pressed, toggle Group mode on or off.
         if (Input.GetKeyDown(KeyCode.G) == true)
         {
             if (GroupMode == false)
@@ -168,7 +169,7 @@ public class SimControl : MonoBehaviour
         }
             
 
-        //If the M key is pressed, toggle Mixed mode on or off.
+        // If the M key is pressed, toggle Mixed mode on or off.
         if (Input.GetKeyDown(KeyCode.M) == true)
         {
             if (MixedMode == false)
@@ -215,7 +216,7 @@ public class SimControl : MonoBehaviour
         }
             
 
-        //If the S key is pressed, toggle Standard mode on or off.
+        // If the S key is pressed, toggle Standard mode on or off.
         if (Input.GetKeyDown(KeyCode.S) == true)
         {
             if (StandardMode == false)
@@ -233,7 +234,7 @@ public class SimControl : MonoBehaviour
         }
 
 
-        //If the R key is pressed, restart the simulation.
+        // If the R key is pressed, restart the simulation.
         if (Input.GetKeyDown(KeyCode.R) == true)
         {
             FightCount = 0;
@@ -250,14 +251,14 @@ public class SimControl : MonoBehaviour
             TotalFightTime = 0;
         }
 
-        //Get the actual delta time, but cap it at one-tenth of
-        //a second. Except in fast mode, where we just make it
-        //one-tenth of a second all the time. Note that if we make
-        //this more than one-tenth of a second, we might get different
-        //results in fast mode vs. normal mode by "jumping" over time
-        //thresholds (cooldowns for example) that are in tenths of a second.
+        // Get the actual delta time, but cap it at one-tenth of
+        // a second. Except in fast mode, where we just make it
+        // one-tenth of a second all the time. Note that if we make
+        // this more than one-tenth of a second, we might get different
+        // results in fast mode vs. normal mode by "jumping" over time
+        // thresholds (cooldowns for example) that are in tenths of a second.
         if (FastMode)
-            DT = 0.1f; //We could go even faster by not having visual feedback in this mode...
+            DT = 0.1f; // We could go even faster by not having visual feedback in this mode...
         else if (Time.deltaTime < 0.1f)
             DT = Time.deltaTime;
         else
@@ -281,19 +282,21 @@ public class SimControl : MonoBehaviour
             MixedSim();
         }
 
+        // Telemetry mode
         if (TelemetryMode)
         {
             TelemetryModeSim();
         }
     }
 
-    //The round is over if either the player is dead or all enemies are.
+    // The round is over if either the player is dead or all enemies are.
     bool IsRoundOver()
     {
-        //Player is dead.
+        // Player is dead.
         if (Player.HitPoints == 0.0f)
         {
-            if (RoundOver == false) //Player just died.
+            // Player just died.
+            if (RoundOver == false) 
             {
                 SpawnInfoText("Cringe...");
                 Defeats++;
@@ -306,12 +309,13 @@ public class SimControl : MonoBehaviour
             }
             return true;
         }
-        //Enemies are dead.
+        // Enemies are dead.
         if (Player.Target == null)
         {
-            if (RoundStart == true) //Make sure player has a chance to find a target at the start of a round.
+            // Make sure player has a chance to find a target at the start of a round.
+            if (RoundStart == true) 
                 return false;
-            if (RoundOver == false) //Last enemy just died.
+            if (RoundOver == false) // Last enemy just died.
             {
                 SpawnInfoText("VICTORY!!!");
                 Victories++;
@@ -320,19 +324,19 @@ public class SimControl : MonoBehaviour
             }
             return true;
         }
-        //Round is not over.
+        // Round is not over.
         RoundStart = false;
         return false;
     }
 
-	//Reset everything for the new round.
+	// Reset everything for the new round.
     void NewRound()
     {
         RoundCount++;
-        //Clear out any remaining enemies.
+        // Clear out any remaining enemies.
         ClearEnemies();
         
-        //The whole fight is over, so start a new one.
+        // The whole fight is over, so start a new one.
         if (RoundCount > Rounds)
         {
             NewFight();
@@ -351,21 +355,21 @@ public class SimControl : MonoBehaviour
             Instantiate(EnemyTypePrefabs[2], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
         else if (RoundCount % 6 == 4)
         {
-            //Adjust the starting X/Y a bit for groups.
+            // Adjust the starting X/Y a bit for groups.
             Instantiate(EnemyTypePrefabs[0], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[0], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[0], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
         }
         else if (RoundCount % 6 == 5)
         {
-            //Adjust the starting X/Y a bit for groups.
+            // Adjust the starting X/Y a bit for groups.
             Instantiate(EnemyTypePrefabs[1], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[1], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[1], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
         }
         else if (RoundCount % 6 == 0)
         {
-            //Adjust the starting X/Y a bit for groups.
+            // Adjust the starting X/Y a bit for groups.
             Instantiate(EnemyTypePrefabs[2], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[2], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[2], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
@@ -454,20 +458,20 @@ public class SimControl : MonoBehaviour
         SpawnInfoText(new Vector3(0, 0, 0), text, isStatic);
     }
 
-    //Spawn text wherever you want.
-    //If set to static, that just means it doesn't move.
+    // Spawn text wherever you want.
+    // If set to static, that just means it doesn't move.
     void SpawnInfoText(Vector3 location, string text, bool isStatic = false)
     {
-        //Throw up some text by calling the Unity engine function Instantiate().
-        //Pass in the appropriate InfoText prefab, its position, its rotation (none in this case),
-        //and its parent (the canvas because this is text). Then we get the
-        //Text component from the new game object in order to set the text itself.
+        // Throw up some text by calling the Unity engine function Instantiate().
+        // Pass in the appropriate InfoText prefab, its position, its rotation (none in this case),
+        // and its parent (the canvas because this is text). Then we get the
+        // Text component from the new game object in order to set the text itself.
         Text infotext;
         if (isStatic)
             infotext = Instantiate(StaticInfoTextPrefab, location, Quaternion.identity, Canvas.transform).GetComponent<Text>();
         else
             infotext = Instantiate(InfoTextPrefab, location, Quaternion.identity, Canvas.transform).GetComponent<Text>();
-        //Set the text.
+        // Set the text.
         infotext.text = text;
     }
 
@@ -489,16 +493,16 @@ public class SimControl : MonoBehaviour
 
     void StandardSim()
     {
-        //It's the start of a fight, so start a new round.
+        // It's the start of a fight, so start a new round.
         if (RoundCount == 0)
             NewRound();
 
         RoundOver = IsRoundOver();
-        if (RoundOver == false) //The round isn't over, so run the simulation (all the logic is in the updates of other classes).
-            TotalFightTime += DT; //Accumulate the SIMULATED time for telemetry data.
-        else if (RoundTimer > 0.0f) //The round is over, but this is the delay before a new round.
-            RoundTimer -= DT; //Update the round delay timer.
-        else //Time for a new round.
+        if (RoundOver == false)     // The round isn't over, so run the simulation (all the logic is in the updates of other classes).
+            TotalFightTime += DT;   // Accumulate the SIMULATED time for telemetry data.
+        else if (RoundTimer > 0.0f) // The round is over, but this is the delay before a new round.
+            RoundTimer -= DT;       // Update the round delay timer.
+        else                        // Time for a new round.
             NewRound();
     }
 
@@ -509,11 +513,11 @@ public class SimControl : MonoBehaviour
             RandomGroupRound();
 
         RoundOver = IsRoundOver();
-        if (RoundOver == false) //The round isn't over, so run the simulation (all the logic is in the updates of other classes).
-            TotalFightTime += DT; //Accumulate the SIMULATED time for telemetry data.
-        else if (RoundTimer > 0.0f) //The round is over, but this is the delay before a new round.
-            RoundTimer -= DT; //Update the round delay timer.
-        else //Time for a new round.
+        if (RoundOver == false)     // The round isn't over, so run the simulation (all the logic is in the updates of other classes).
+            TotalFightTime += DT;   // Accumulate the SIMULATED time for telemetry data.
+        else if (RoundTimer > 0.0f) // The round is over, but this is the delay before a new round.
+            RoundTimer -= DT;       // Update the round delay timer.
+        else                        // Time for a new round.
             RandomGroupRound();
     }
 
@@ -521,10 +525,10 @@ public class SimControl : MonoBehaviour
     {
         RoundCount++;
 
-        //Clear out any remaining enemies.
+        // Clear out any remaining enemies.
         ClearEnemies();
 
-        //The whole fight is over, so start a new one.
+        // The whole fight is over, so start a new one.
         if (RoundCount > 1)
         {
             GroupMode = false;
@@ -573,7 +577,7 @@ public class SimControl : MonoBehaviour
             Instantiate(EnemyTypePrefabs[4], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[4], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
         }
-        else if (MixedModeRounds % 6 == 0)
+        else if (RoundCount % 6 == 0)
         {
             //Adjust the starting X/Y a bit for groups.
             Instantiate(EnemyTypePrefabs[5], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
@@ -581,39 +585,39 @@ public class SimControl : MonoBehaviour
             Instantiate(EnemyTypePrefabs[5], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
         }
 
-        //Call the Initialize() functions for the player.
+        // Call the Initialize() functions for the player.
         Player.Initialize();
 
-        //Feedback is good...
-        SpawnInfoText("ROUND " + RoundCount); //Look! A string concatenation operator!
+        // Feedback is good...
+        SpawnInfoText("ROUND " + RoundCount); // Look! A string concatenation operator!
 
-        //Reset the round delay timer (and round start flag) for after this new round ends.
+        // Reset the round delay timer (and round start flag) for after this new round ends.
         RoundTimer = RoundDelay;
         RoundStart = true;
     }
 
     void MixedSim()
     {
-        //It's the start of a fight, so start a new round.
+        // It's the start of a fight, so start a new round.
         if (RoundCount == 0)
             MixedRounds();
 
         RoundOver = IsRoundOver();
-        if (RoundOver == false) //The round isn't over, so run the simulation (all the logic is in the updates of other classes).
-            TotalFightTime += DT; //Accumulate the SIMULATED time for telemetry data.
-        else if (RoundTimer > 0.0f) //The round is over, but this is the delay before a new round.
-            RoundTimer -= DT; //Update the round delay timer.
-        else //Time for a new round.
+        if (RoundOver == false)     // The round isn't over, so run the simulation (all the logic is in the updates of other classes).
+            TotalFightTime += DT;   // Accumulate the SIMULATED time for telemetry data.
+        else if (RoundTimer > 0.0f) // The round is over, but this is the delay before a new round.
+            RoundTimer -= DT;       // Update the round delay timer.
+        else                        // Time for a new round.
             MixedRounds();
     }
 
     void MixedRounds()
     {
         RoundCount++;
-        //Clear out any remaining enemies.
+        // Clear out any remaining enemies.
         ClearEnemies();
 
-        //The whole fight is over, so start a new one.
+        // The whole fight is over, so start a new one.
         if (RoundCount > 6)
         {
             MixedMode = false;
@@ -670,13 +674,13 @@ public class SimControl : MonoBehaviour
             Instantiate(EnemyTypePrefabs[5], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
         }
 
-        //Call the Initialize() functions for the player.
+        // Call the Initialize() functions for the player.
         Player.Initialize();
 
-        //Feedback is good...
-        SpawnInfoText("ROUND " + RoundCount); //Look! A string concatenation operator!
+        // Feedback is good...
+        SpawnInfoText("ROUND " + RoundCount); // Look! A string concatenation operator!
 
-        //Reset the round delay timer (and round start flag) for after this new round ends.
+        // Reset the round delay timer (and round start flag) for after this new round ends.
         RoundTimer = RoundDelay;
         RoundStart = true;
     }
@@ -686,7 +690,7 @@ public class SimControl : MonoBehaviour
     {
         FastMode = true;
         AutoMode = true;
-        //It's the start of a fight, so start a new round.
+        // It's the start of a fight, so start a new round.
         if (RoundCount == 0)
             TelemetryModeRounds();
 
@@ -698,9 +702,9 @@ public class SimControl : MonoBehaviour
             TotalFightTime += DT; 
             FightRecorder.AVGRoundTime += TotalFightTime;
         }
-        else if (RoundTimer > 0.0f) //The round is over, but this is the delay before a new round.
-            RoundTimer -= DT; //Update the round delay timer.
-        else //Time for a new round.
+        else if (RoundTimer > 0.0f) // The round is over, but this is the delay before a new round.
+            RoundTimer -= DT;       // Update the round delay timer.
+        else                        // Time for a new round.
             TelemetryModeRounds();
     }
 
