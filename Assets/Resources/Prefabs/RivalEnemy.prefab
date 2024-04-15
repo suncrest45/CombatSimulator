@@ -692,7 +692,6 @@ MonoBehaviour:
   MoveSpeed: 2
   OptimalRange: 3
   StunTimer: 3
-  EnemyName: Alpha
   HitPoints: 200
   Target: {fileID: 0}
   HealthBar: {fileID: 0}
@@ -744,8 +743,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CooldownTime: 1
-  DamageDone: 10
-  MaximumRange: 10
+  DamageDone: 2
+  MaximumRange: 30
   RizzSteal: 0
   summoner: 0
   Inactive: 0
