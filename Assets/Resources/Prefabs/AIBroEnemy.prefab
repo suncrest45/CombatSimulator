@@ -110,6 +110,7 @@ MonoBehaviour:
   HealthBar: {fileID: 0}
   AbilityOne: {fileID: 0}
   AbilityTwo: {fileID: 0}
+  enemyType: 4
 --- !u!1 &2033289463533228329
 GameObject:
   m_ObjectHideFlags: 0

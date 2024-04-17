@@ -13,6 +13,10 @@ PrefabInstance:
       value: FailedNFTBro
       objectReference: {fileID: 0}
     - target: {fileID: 2822892602312367930, guid: 9a5a91181f0ff8a4ab17dbf8acc5d723, type: 3}
+      propertyPath: enemyType
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822892602312367930, guid: 9a5a91181f0ff8a4ab17dbf8acc5d723, type: 3}
       propertyPath: MaxHitPoints
       value: 25
       objectReference: {fileID: 0}

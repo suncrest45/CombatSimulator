@@ -219,11 +219,9 @@ public class Hero : MonoBehaviour
             return;
         }
 
-        var enemies = FindObjectsOfType<Enemy>();
-
-        if (enemies.Length > 1)
+        if (Power >= Abilities[4].PowerUsed)
         {
-            UseAbility(5);
+            UseAbility(4);
         }
 
 
@@ -231,8 +229,10 @@ public class Hero : MonoBehaviour
         float distanceToTarget = Mathf.Abs(transform.position.x - Target.transform.position.x);
 
 
-        // Spam the tweet ability
+        // Spam the tweet and heal ability
         UseAbility(0);
+
+        UseAbility(2);
 
         // If an enemy is very close to the player use the light skin stare
         if (distanceToTarget < OptimalRange)

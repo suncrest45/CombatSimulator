@@ -28,6 +28,10 @@ PrefabInstance:
       propertyPath: CatchyOneLiner
       value: AAAAAAAAAAHHHHHHH
       objectReference: {fileID: 0}
+    - target: {fileID: 4811237811565442885, guid: dcf72279d08631340ad1b2c1f146b376, type: 3}
+      propertyPath: enemyType
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 6693406514296532774, guid: dcf72279d08631340ad1b2c1f146b376, type: 3}
       propertyPath: m_Name
       value: Berserker

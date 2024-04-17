@@ -69,6 +69,10 @@ PrefabInstance:
       value: 0.63239616
       objectReference: {fileID: 0}
     - target: {fileID: 5966245576881448871, guid: a42aa80b61a392b4b9c57a5ab21bdfc0, type: 3}
+      propertyPath: enemyType
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5966245576881448871, guid: a42aa80b61a392b4b9c57a5ab21bdfc0, type: 3}
       propertyPath: MaxHitPoints
       value: 25
       objectReference: {fileID: 0}

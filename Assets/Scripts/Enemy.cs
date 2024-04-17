@@ -63,6 +63,8 @@ public class Enemy : MonoBehaviour
         Berserker
     }
 
+    public EnemyType enemyType;
+
     public static string NameAccessor
     { 
         get => EnemyName;

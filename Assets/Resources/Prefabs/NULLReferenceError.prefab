@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NULLReferenceError
       objectReference: {fileID: 0}
+    - target: {fileID: 1574630794742965890, guid: f4fc37a8776a77146ab515d27ee143d5, type: 3}
+      propertyPath: enemyType
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1711125805076730171, guid: f4fc37a8776a77146ab515d27ee143d5, type: 3}
       propertyPath: m_text
       value: "NULL \n(Support)"
