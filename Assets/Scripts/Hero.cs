@@ -231,34 +231,13 @@ public class Hero : MonoBehaviour
 
         // Spam the tweet and heal ability
         UseAbility(0);
-
         UseAbility(2);
 
         // If an enemy is very close to the player use the light skin stare
         if (distanceToTarget < OptimalRange)
         {
             UseAbility(1);
-        }
-
-        if (Target)
-        {
-            // If the target is below 20% hit points, go in for the finisher.
-            if (Target.HitPoints < (0.2 * Target.MaxHitPoints) && distanceToTarget > Abilities[3].MaximumRange)
-            {
-                // Get the player in range to use the finisher
-                float newX = transform.position.x;
-                newX += MoveSpeed * SimControl.DT;
-                // Don't go past the edge of the arena.
-                newX = Mathf.Clamp(newX, -SimControl.EdgeDistance, SimControl.EdgeDistance);
-                // Update the transform.
-                transform.position = new Vector3(newX, transform.position.y, transform.position.z);
-
-                // When in range use the ability
-                if (distanceToTarget <= Abilities[3].MaximumRange)
-                {
-                    UseAbility(3);
-                }
-            }
+            UseAbility(3);
         }
     }
 

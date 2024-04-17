@@ -44,11 +44,13 @@ public class SimControl : MonoBehaviour
     //which is artificially increased when in fast mode.
     public static float DT;
 
-    //How many different AI types (and therefore how many "fights") do we want?
+    // How many different AI types (and therefore how many "fights") do we want?
     public int Fights = 36;
     private int FightCount = 0;
-    public static bool SimOver = false; //Have all the fights been completed?
-    public static string CurrentAI = "Random"; //What's the current type of AI for this fight?
+    // Have all the fights been completed?
+    public static bool SimOver = false;
+    // What's the current type of AI for this fight?
+    public static string CurrentAI = "Random"; 
 
     // How many rounds is each "fight"?
     public int Rounds = 10;
@@ -298,14 +300,19 @@ public class SimControl : MonoBehaviour
             // Player just died.
             if (RoundOver == false) 
             {
+                float totalCurrentHp = 0.0f;
+                float totalMaxHP = 0.0f;
                 SpawnInfoText("Cringe...");
                 Defeats++;
                 FightRecorder.LossesAcessor = Defeats;
                 var enemies = FindObjectsOfType<Enemy>();
                 foreach (Enemy item in enemies)
                 {
-                    FightRecorder.m_Ratings[RoundCount - 1] += item.HitPoints;
+                    totalCurrentHp += item.HitPoints;
+                    totalMaxHP += item.MaxHitPoints;
                 }
+
+                FightRecorder.m_Ratings[RoundCount - 1] = -(totalCurrentHp / totalMaxHP) * 100.0f;
             }
             return true;
         }
@@ -320,7 +327,7 @@ public class SimControl : MonoBehaviour
                 SpawnInfoText("VICTORY!!!");
                 Victories++;
                 FightRecorder.WinsAccessor = Victories;
-                FightRecorder.m_Ratings[RoundCount - 1] = Player.HitPoints;
+                FightRecorder.m_Ratings[RoundCount - 1] = (Player.HitPoints / Player.MaxHitPoints) * 100.0f;
             }
             return true;
         }
@@ -426,10 +433,10 @@ public class SimControl : MonoBehaviour
         DataStream.WriteLine(CurrentAI
                              + "," + FightRecorder.NameAccessor
                              + "," + FightRecorder.GroupAccessor
-                             + "," + FightRecorder.WinsAccessor 
+                             + "," + FightRecorder.WinsAccessor
                              + "," + FightRecorder.LossesAcessor
                              + "," + FightRecorder.CalculateWinPercentage()
-                             + "," + FightRecorder.DPSAccessor / TotalFightTime 
+                             + "," + FightRecorder.DPSAccessor / Rounds
                              + "," + FightRecorder.CalculateAVGRoundTime()
                              + "," + FightRecorder.GetAbilityUsage("Tweet")
                              + "," + FightRecorder.GetAbilityUsage("Light-Skin Stare")
