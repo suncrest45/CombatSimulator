@@ -47,6 +47,22 @@ public class Enemy : MonoBehaviour
     [HideInInspector]
     public EnemyAbility AbilityTwo; //This one might be inactive for simple enemies.
 
+    public enum EnemyType
+    {
+        SoyWojack,
+        KeyboardWarrior,
+        GymBro,
+        NFTBro,
+        AIBro,
+        Rival,
+        FailedWojack,
+        FaildKeyboardWarrior,
+        SkipedLegDay,
+        FailedNFTBro,
+        NULLReference,
+        Berserker
+    }
+
     public static string NameAccessor
     { 
         get => EnemyName;

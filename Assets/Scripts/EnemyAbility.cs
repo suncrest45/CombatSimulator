@@ -38,6 +38,8 @@ public class EnemyAbility : MonoBehaviour
     public bool Inactive = false;
     // The amount of rizz to steal
     public float RizzToSteal = 0.0f;
+    // Catchy One Liner
+    public string CatchyOneLiner = string.Empty;
 
     // How much of the cooldown time is actually left.
     [HideInInspector]
@@ -138,6 +140,9 @@ public class EnemyAbility : MonoBehaviour
             ParentEnemy.Target.Target = ParentEnemy;
             Instantiate(SimControl.EnemyTypePrefabs[Random.Range(6,12)], new Vector3(SimControl.StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
         }
+
+        Text OneLiner = Object.Instantiate(SimControl.InfoTextPrefab, ParentEnemy.transform.position, Quaternion.identity, SimControl.Canvas.transform).GetComponent<Text>();
+        OneLiner.text = CatchyOneLiner;
 
         // Put the ability on cooldown.
         CooldownLeft = CooldownTime;

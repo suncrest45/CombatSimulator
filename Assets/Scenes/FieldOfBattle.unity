@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AbilityName: Fact-Check
-  CatchyOneLiner: Good Ole Wikipedia
+  CatchyOneLiner: Nano-Machines Son
   CooldownTime: 5
   DamageDone: 0
   PowerUsed: -20
@@ -230,6 +230,8 @@ MonoBehaviour:
   Finisher: 0
   AoE: 0
   Inactive: 0
+  heal: 1
+  healAmount: 25
   CooldownLeft: 0
   CooldownBar: {fileID: 0}
   AbilityNumber: {fileID: 0}
@@ -1494,6 +1496,8 @@ MonoBehaviour:
   Finisher: 0
   AoE: 0
   Inactive: 0
+  heal: 0
+  healAmount: 0
   CooldownLeft: 0
   CooldownBar: {fileID: 0}
   AbilityNumber: {fileID: 0}
@@ -1745,6 +1749,8 @@ MonoBehaviour:
   Finisher: 0
   AoE: 0
   Inactive: 0
+  heal: 0
+  healAmount: 0
   CooldownLeft: 0
   CooldownBar: {fileID: 0}
   AbilityNumber: {fileID: 0}
@@ -2273,6 +2279,8 @@ MonoBehaviour:
   Finisher: 0
   AoE: 1
   Inactive: 0
+  heal: 0
+  healAmount: 0
   CooldownLeft: 0
   CooldownBar: {fileID: 0}
   AbilityNumber: {fileID: 0}
@@ -2887,6 +2895,8 @@ MonoBehaviour:
   Finisher: 0
   AoE: 0
   Inactive: 0
+  heal: 0
+  healAmount: 0
   CooldownLeft: 0
   CooldownBar: {fileID: 0}
   AbilityNumber: {fileID: 0}

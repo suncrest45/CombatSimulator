@@ -105,7 +105,6 @@ MonoBehaviour:
   MoveSpeed: 1
   OptimalRange: 5
   StunTimer: 0
-  EnemyName: AIBro
   HitPoints: 200
   Target: {fileID: 0}
   HealthBar: {fileID: 0}
@@ -157,12 +156,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CooldownTime: 10
-  DamageDone: 1
+  DamageDone: 0
   MaximumRange: 10
   RizzSteal: 0
   summoner: 0
   Inactive: 1
   RizzToSteal: 0
+  CatchyOneLiner: Nothing
   CooldownLeft: 0
   CooldownBar: {fileID: 0}
   ParentEnemy: {fileID: 0}
@@ -750,6 +750,7 @@ MonoBehaviour:
   summoner: 1
   Inactive: 0
   RizzToSteal: 0
+  CatchyOneLiner: Behold my master piece
   CooldownLeft: 0
   CooldownBar: {fileID: 0}
   ParentEnemy: {fileID: 0}

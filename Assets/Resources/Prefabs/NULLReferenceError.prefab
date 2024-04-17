@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NULLReferenceError
       objectReference: {fileID: 0}
+    - target: {fileID: 1711125805076730171, guid: f4fc37a8776a77146ab515d27ee143d5, type: 3}
+      propertyPath: m_text
+      value: "NULL \n(Support)"
+      objectReference: {fileID: 0}
     - target: {fileID: 4615236743478113654, guid: f4fc37a8776a77146ab515d27ee143d5, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -63,6 +67,10 @@ PrefabInstance:
     - target: {fileID: 7167607879696535537, guid: f4fc37a8776a77146ab515d27ee143d5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7183424399501854238, guid: f4fc37a8776a77146ab515d27ee143d5, type: 3}
+      propertyPath: Inactive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
