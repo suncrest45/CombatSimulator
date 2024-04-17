@@ -40,6 +40,8 @@ public class SimControl : MonoBehaviour
     public static bool TelemetryMode = false;
     //Does the simulation start in Telemetry mode?
     public static bool StandardMode = true;
+    // Does the simulation start in Playtest mode?
+    public static bool PlaytestMode = false;
     //This is the delta time the simulation uses,
     //which is artificially increased when in fast mode.
     public static float DT;

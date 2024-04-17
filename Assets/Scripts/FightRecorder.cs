@@ -18,6 +18,8 @@ public static class FightRecorder
     private static int m_Rounds;
     private static float m_DamageDone;
     public static float[] m_Ratings;
+    private static float m_LowestPlayerHealth;
+    private static float m_LowestEnemyHealth;
 
     // Constructor for the fight recorder class
     static FightRecorder()
@@ -83,7 +85,38 @@ public static class FightRecorder
         set => m_GroupType = value;
     }
 
-    
+    public static float LowestPlayerHealthAccessor
+    {
+        get => m_LowestPlayerHealth;
+        set => m_LowestPlayerHealth = value;
+    }
+
+    public static float LowestEnemyHealthAccessor
+    {
+        get => m_LowestEnemyHealth;
+        set => m_LowestEnemyHealth = value;
+    }
+
+    public static void LowestPlayerHealth(float playerHealth)
+    {
+        if (playerHealth < LowestPlayerHealthAccessor)
+        {
+            LowestPlayerHealthAccessor = playerHealth;
+        }
+    }
+
+    public static void LowestEnemyhealth(float enemyHealth)
+    {
+        if (enemyHealth < LowestEnemyHealthAccessor)
+        {
+            LowestEnemyHealthAccessor = enemyHealth;
+        }
+    }
+
+    public static void LowestEnemyHealth(float enemyHealth)
+    {
+
+    }
 
    
     public static void CalculateAbilityUsage()
@@ -126,6 +159,8 @@ public static class FightRecorder
         m_Rounds = num_rounds;
         m_DamageDone = 0.0f;
         m_Ratings = new float[num_rounds];
+        m_LowestEnemyHealth = 0.0f;
+        m_LowestPlayerHealth = 0.0f;
 
         // Initialise the dictionaries keeping track of the abilities.
         for (int i = 0; i < playerAbilities.Length; i++)
