@@ -384,6 +384,7 @@ MonoBehaviour:
   summoner: 0
   Inactive: 0
   RizzToSteal: 0
+  CatchyOneLiner: I am true sigma
   CooldownLeft: 0
   CooldownBar: {fileID: 0}
   ParentEnemy: {fileID: 0}
@@ -749,6 +750,7 @@ MonoBehaviour:
   summoner: 0
   Inactive: 0
   RizzToSteal: 0
+  CatchyOneLiner: Fall
   CooldownLeft: 0
   CooldownBar: {fileID: 0}
   ParentEnemy: {fileID: 0}

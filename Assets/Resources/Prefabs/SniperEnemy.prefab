@@ -388,6 +388,7 @@ MonoBehaviour:
   summoner: 0
   Inactive: 1
   RizzToSteal: 0
+  CatchyOneLiner: 
   CooldownLeft: 0
   CooldownBar: {fileID: 0}
   ParentEnemy: {fileID: 0}
@@ -553,6 +554,7 @@ MonoBehaviour:
   summoner: 0
   Inactive: 0
   RizzToSteal: 0
+  CatchyOneLiner: CHAPTER I. Down the Rabbit-Hole Alice
   CooldownLeft: 0
   CooldownBar: {fileID: 0}
   ParentEnemy: {fileID: 0}

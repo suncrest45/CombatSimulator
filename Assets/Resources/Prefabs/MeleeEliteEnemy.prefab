@@ -260,6 +260,7 @@ MonoBehaviour:
   summoner: 0
   Inactive: 0
   RizzToSteal: 0
+  CatchyOneLiner: I will break you in two
   CooldownLeft: 0
   CooldownBar: {fileID: 0}
   ParentEnemy: {fileID: 0}
@@ -413,6 +414,7 @@ MonoBehaviour:
   summoner: 0
   Inactive: 0
   RizzToSteal: 0
+  CatchyOneLiner: Do you even lift bro?
   CooldownLeft: 0
   CooldownBar: {fileID: 0}
   ParentEnemy: {fileID: 0}

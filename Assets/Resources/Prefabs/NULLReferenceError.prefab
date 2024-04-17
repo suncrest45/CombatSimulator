@@ -72,6 +72,14 @@ PrefabInstance:
       propertyPath: Inactive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7183424399501854238, guid: f4fc37a8776a77146ab515d27ee143d5, type: 3}
+      propertyPath: summoner
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7183424399501854238, guid: f4fc37a8776a77146ab515d27ee143d5, type: 3}
+      propertyPath: CatchyOneLiner
+      value: '#####'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

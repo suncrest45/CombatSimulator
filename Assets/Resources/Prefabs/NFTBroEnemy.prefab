@@ -694,6 +694,7 @@ MonoBehaviour:
   summoner: 0
   Inactive: 1
   RizzToSteal: 0
+  CatchyOneLiner: 
   CooldownLeft: 0
   CooldownBar: {fileID: 0}
   ParentEnemy: {fileID: 0}
@@ -749,6 +750,7 @@ MonoBehaviour:
   summoner: 0
   Inactive: 0
   RizzToSteal: 10
+  CatchyOneLiner: Web 3 is the future
   CooldownLeft: 0
   CooldownBar: {fileID: 0}
   ParentEnemy: {fileID: 0}

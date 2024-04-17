@@ -388,6 +388,7 @@ MonoBehaviour:
   summoner: 0
   Inactive: 1
   RizzToSteal: 0
+  CatchyOneLiner: Die Faster
   CooldownLeft: 0
   CooldownBar: {fileID: 0}
   ParentEnemy: {fileID: 0}
@@ -541,6 +542,7 @@ MonoBehaviour:
   summoner: 0
   Inactive: 0
   RizzToSteal: 0
+  CatchyOneLiner: Die
   CooldownLeft: 0
   CooldownBar: {fileID: 0}
   ParentEnemy: {fileID: 0}
@@ -649,7 +651,6 @@ MonoBehaviour:
   MoveSpeed: 0.75
   OptimalRange: 1
   StunTimer: 0
-  EnemyName: SoyWojack
   HitPoints: 200
   Target: {fileID: 0}
   HealthBar: {fileID: 0}
