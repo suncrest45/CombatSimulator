@@ -1337,6 +1337,8 @@ MonoBehaviour:
 
     No Damage
 
+    Heals
+
     +20 Rizz'
 --- !u!222 &693789271
 CanvasRenderer:
@@ -1784,8 +1786,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6deaac7b45ff9bd4086939ab628a4a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Fights: 36
-  Rounds: 10
+  Fights: 14
+  Rounds: 1
   RoundDelay: 3
   Abilities:
   - {fileID: 1748617876}
