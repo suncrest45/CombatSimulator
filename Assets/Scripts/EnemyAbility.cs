@@ -30,8 +30,11 @@ public class EnemyAbility : MonoBehaviour
     public float CooldownTime = 1.0f;
     public float DamageDone = 1.0f;
     public float MaximumRange = 10.0f;
+    public float StunTimer = 0.0f;
     // This ability will steal the player's rizz
     public bool RizzSteal = false;
+    // This ability will stun
+    public bool Stuns = false;
     // This ability will summon cheap copies of enemies
     public bool summoner = false;
     // Make an ability inactive to temporarily or permanently not have it used.
@@ -139,6 +142,11 @@ public class EnemyAbility : MonoBehaviour
         {
             ParentEnemy.Target.Target = ParentEnemy;
             Instantiate(SimControl.EnemyTypePrefabs[Random.Range(6,12)], new Vector3(SimControl.StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
+        }
+
+        if (Stuns)
+        {
+            ParentEnemy.Target.StunTimer = StunTimer;
         }
 
         Text OneLiner = Object.Instantiate(SimControl.InfoTextPrefab, ParentEnemy.transform.position, Quaternion.identity, SimControl.Canvas.transform).GetComponent<Text>();

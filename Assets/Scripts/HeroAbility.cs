@@ -130,6 +130,8 @@ public class HeroAbility : MonoBehaviour
             return false;
         if (Finisher && (ParentHero.Target.HitPoints < (0.2 * ParentHero.Target.HitPoints)))
             return false;
+        if (ParentHero.StunTimer > 0.0f)
+            return false;
         //Ready to go.
         return true;
     }

@@ -29,6 +29,7 @@ public class Hero : MonoBehaviour
     public float MoveSpeed = 0.1f;
     public float MaxPower = 100;
     public float OptimalRange = 5.0f;
+    public float StunTimer = 0.0f;
 
     [HideInInspector]
     public float HitPoints = 200; // Current hit points
@@ -107,6 +108,13 @@ public class Hero : MonoBehaviour
     {
         if (HitPoints <= 0.0f || Target == null) //If all enemies or the player is dead, no need to move.
             return;
+
+        if (StunTimer > 0.0f)
+        {
+            StunTimer -= SimControl.DT;
+            return;
+        }
+
         //Get our current X position.
         float newX = transform.position.x;
 
