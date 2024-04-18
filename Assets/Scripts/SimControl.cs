@@ -114,10 +114,10 @@ public class SimControl : MonoBehaviour
         InfoTextPrefab = Resources.Load("Prefabs/InfoText") as GameObject;
         StaticInfoTextPrefab = Resources.Load("Prefabs/StaticInfoText") as GameObject;
 
-        
-
         FightRecorder.InitRecorder(Abilities, Rounds);
         InitialiseEnemies();
+
+        UpdateTelemetryHealthValues();
     }
 
     // Update is called once per frame
@@ -291,6 +291,10 @@ public class SimControl : MonoBehaviour
         {
             TelemetryModeSim();
         }
+
+        // Keep track of the lowest amount of player hit points
+        FightRecorder.LowestPlayerHealth(Player.HitPoints);
+        DetermineLowestTotalEnemyHealth();
     }
 
     // The round is over if either the player is dead or all enemies are.
@@ -302,7 +306,6 @@ public class SimControl : MonoBehaviour
             // Player just died.
             if (RoundOver == false) 
             {
-                float totalCurrentHp = 0.0f;
                 float totalMaxHP = 0.0f;
                 SpawnInfoText("Cringe...");
                 Defeats++;
@@ -310,11 +313,10 @@ public class SimControl : MonoBehaviour
                 var enemies = FindObjectsOfType<Enemy>();
                 foreach (Enemy item in enemies)
                 {
-                    totalCurrentHp += item.HitPoints;
                     totalMaxHP += item.MaxHitPoints;
                 }
 
-                FightRecorder.m_Ratings[RoundCount - 1] = -(totalCurrentHp / totalMaxHP) * 100.0f;
+                FightRecorder.m_Ratings[RoundCount - 1] = -(FightRecorder.LowestEnemyHealthAccessor / totalMaxHP) * 100.0f;
             }
             return true;
         }
@@ -329,7 +331,7 @@ public class SimControl : MonoBehaviour
                 SpawnInfoText("VICTORY!!!");
                 Victories++;
                 FightRecorder.WinsAccessor = Victories;
-                FightRecorder.m_Ratings[RoundCount - 1] = (Player.HitPoints / Player.MaxHitPoints) * 100.0f;
+                FightRecorder.m_Ratings[RoundCount - 1] = (FightRecorder.LowestPlayerHealthAccessor / Player.MaxHitPoints) * 100.0f;
             }
             return true;
         }
@@ -454,6 +456,7 @@ public class SimControl : MonoBehaviour
 
         // Reset the recorder for each fight
         FightRecorder.InitRecorder(Abilities, Rounds);
+        UpdateTelemetryHealthValues();
 
         // After the first fight (which is random), just spam a single key for each fight.
         if (!TelemetryMode)
@@ -531,6 +534,36 @@ public class SimControl : MonoBehaviour
         EnemyTypePrefabs[9] = Resources.Load("Prefabs/FailedNFTBro") as GameObject;
         EnemyTypePrefabs[10] = Resources.Load("Prefabs/NULLReferenceError") as GameObject;
         EnemyTypePrefabs[11] = Resources.Load("Prefabs/Berserker") as GameObject;
+    }
+
+    void DetermineLowestTotalEnemyHealth()
+    {
+        float totalCurrentHP = 0.0f;
+        var enemies = FindObjectsOfType<Enemy>();
+        foreach (Enemy item in enemies)
+        {
+            totalCurrentHP += item.HitPoints;
+        }
+
+        if (totalCurrentHP < FightRecorder.LowestEnemyHealthAccessor)
+        {
+            FightRecorder.LowestEnemyHealthAccessor = totalCurrentHP;
+        }
+    }
+
+    void UpdateTelemetryHealthValues()
+    {
+        // Set the lowest player health.
+        FightRecorder.LowestPlayerHealthAccessor = Player.MaxHitPoints;
+
+        // Set the lowest enemy health
+        float totalCurrentHP = 0.0f;
+        var enemies = FindObjectsOfType<Enemy>();
+        foreach (Enemy item in enemies)
+        {
+            totalCurrentHP += item.MaxHitPoints;
+        }
+        FightRecorder.LowestPlayerHealthAccessor = totalCurrentHP;
     }
 
     void StandardSim()
