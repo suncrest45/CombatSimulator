@@ -159,6 +159,7 @@ public class HeroAbility : MonoBehaviour
             }
         }
 
+        // If the ability is marked AoE
         if (AoE == true)
         {
             var enemies = FindObjectsOfType<Enemy>();
