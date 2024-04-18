@@ -201,7 +201,7 @@ public class Hero : MonoBehaviour
     //Try to use a random ability.
     public bool UseRandomAbility()
     {
-        //Get a random number between 1 and 4. Yes, the integer version of this function is not
+        //Get a random number between 0 and the size of ability array. Yes, the integer version of this function is not
         //inclusive. This is wrong and Unity should feel bad for doing this.
         return UseAbility(Random.Range(0, Abilities.Length));
     }

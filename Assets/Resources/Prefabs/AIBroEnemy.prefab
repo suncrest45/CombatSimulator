@@ -108,8 +108,9 @@ MonoBehaviour:
   HitPoints: 200
   Target: {fileID: 0}
   HealthBar: {fileID: 0}
-  AbilityOne: {fileID: 0}
-  AbilityTwo: {fileID: 0}
+  enemyAbilities:
+  - {fileID: 7183424399501854238}
+  - {fileID: 6189940755764805086}
   enemyType: 4
 --- !u!1 &2033289463533228329
 GameObject:
@@ -159,7 +160,9 @@ MonoBehaviour:
   CooldownTime: 10
   DamageDone: 0
   MaximumRange: 10
+  StunTimer: 0
   RizzSteal: 0
+  Stuns: 0
   summoner: 0
   Inactive: 1
   RizzToSteal: 0
@@ -747,7 +750,9 @@ MonoBehaviour:
   CooldownTime: 15
   DamageDone: 0
   MaximumRange: 30
+  StunTimer: 0
   RizzSteal: 0
+  Stuns: 0
   summoner: 1
   Inactive: 0
   RizzToSteal: 0

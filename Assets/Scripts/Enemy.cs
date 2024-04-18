@@ -32,20 +32,20 @@ public class Enemy : MonoBehaviour
     public float StunTimer = 0.0f;
     public static string EnemyName = string.Empty;
 
+    // Current hit points.
     [HideInInspector]
-    public float HitPoints = 200; //Current hit points.
+    public float HitPoints = 200; 
 
+    // Current target (always the hero in this case).
     [HideInInspector]
-    public Hero Target; //Current target (always the hero in this case).
+    public Hero Target;           
 
+    // Reference to the health bar, so we don't have to look it up all the time.
     [HideInInspector]
-    public BarScaler HealthBar; //Reference to the health bar, so we don't have to look it up all the time.
+    public BarScaler HealthBar;   
 
-    //References to the abilities, so we don't have to look them up all the time.
-    [HideInInspector]
-    public EnemyAbility AbilityOne; //Always need this to be a "real" ability.
-    [HideInInspector]
-    public EnemyAbility AbilityTwo; //This one might be inactive for simple enemies.
+    // All the abilities an enemy has
+    public EnemyAbility[] enemyAbilities;
 
     public enum EnemyType
     {
@@ -77,8 +77,6 @@ public class Enemy : MonoBehaviour
         //Find() will get the first child game object of that name.
         //Use GetComponent so we don't have to use it later to access the functionality we want.
         HealthBar = transform.Find("EnemyHealth").GetComponent<BarScaler>();
-        AbilityOne = transform.Find("AbilityOne").GetComponent<EnemyAbility>();
-        AbilityTwo = transform.Find("AbilityTwo").GetComponent<EnemyAbility>();
     }
 
     //Update is called once per frame
@@ -133,8 +131,10 @@ public class Enemy : MonoBehaviour
         //Reset hit points.
         HitPoints = MaxHitPoints;
         //Reset all the cooldowns.
-        if (AbilityOne != null) AbilityOne.ResetCooldown();
-        if (AbilityTwo != null) AbilityTwo.ResetCooldown();
+        for (int i = 0; i < enemyAbilities.Length; i++)
+        {
+            if (enemyAbilities[i] != null) enemyAbilities[i].ResetCooldown();
+        }
         //Find the target.
         Target = GameObject.Find("Hero").GetComponent<Hero>();
         //Make sure the health bar gets reset as well.
@@ -144,20 +144,25 @@ public class Enemy : MonoBehaviour
     //Try to use a random ability.
     public bool UseRandomAbility()
     {
-        //Get a random number between 1 and 2. Yes, the integer version of this function is not
-        //inclusive. This is wrong and Unity should feel bad for doing this.
-        return UseAbility(Random.Range(1, 3));
+        // Get a random number between 0 and the length of ability array. Yes, the integer version of this function is not
+        // inclusive. This is wrong and Unity should feel bad for doing this.
+        return UseAbility(Random.Range(0, enemyAbilities.Length));
     }
 
     //Try to use a specific ability. Returns whether it actually was used.
     public bool UseAbility(int abilityNumber)
     {
-        //We could do this with an array of abilities,
-        //but there are only two and we are lazy.
-        if (abilityNumber == 1 && AbilityOne != null)
-            return AbilityOne.Use();
-        if (abilityNumber == 2 && AbilityTwo != null)
-            return AbilityTwo.Use();
+        if (abilityNumber < 0 || abilityNumber >= enemyAbilities.Length)
+        {
+            return false;
+        }
+
+        if (enemyAbilities[abilityNumber] != null)
+        {
+            return enemyAbilities[abilityNumber].Use();
+        }
+            
+        
         return false;
     }
 
