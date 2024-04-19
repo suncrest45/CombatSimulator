@@ -163,6 +163,7 @@ public class SimControl : MonoBehaviour
                 FastMode = false;
                 Rounds = 6;
                 Fights = 1;
+                CurrentAI = "Player";
                 NewFight();
             }
             else
@@ -187,6 +188,7 @@ public class SimControl : MonoBehaviour
                 FastMode = false;
                 Rounds = 6;
                 Fights = 1;
+                CurrentAI = "Player";
                 NewFight();
             }
             else
@@ -234,6 +236,7 @@ public class SimControl : MonoBehaviour
                 TelemetryMode = false;
                 Fights = 14;
                 Rounds = 1;
+                CurrentAI = "Player";
                 NewFight();
             }
         }
