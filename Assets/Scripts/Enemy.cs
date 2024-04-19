@@ -30,7 +30,11 @@ public class Enemy : MonoBehaviour
     public float MoveSpeed = 0.1f;
     public float OptimalRange = 5.0f;
     public float StunTimer = 0.0f;
+    private float damageTimer = 0.0f;
     public static string EnemyName = string.Empty;
+    private SpriteRenderer enemyRender;
+    private Color defaultColor;
+    private Color damageColor = Color.red;
 
     // Current hit points.
     [HideInInspector]
@@ -77,6 +81,8 @@ public class Enemy : MonoBehaviour
         //Find() will get the first child game object of that name.
         //Use GetComponent so we don't have to use it later to access the functionality we want.
         HealthBar = transform.Find("EnemyHealth").GetComponent<BarScaler>();
+        enemyRender = GetComponentInParent<SpriteRenderer>();
+        defaultColor = enemyRender.color;
     }
 
     //Update is called once per frame
@@ -89,6 +95,16 @@ public class Enemy : MonoBehaviour
         //The fight is on, so move and use abilities.
         DoMovement();
         UseRandomAbility();
+
+        if (damageTimer > 0.0f)
+        {
+            damageTimer -= SimControl.DT;
+            enemyRender.color = damageColor;
+        }
+        else
+        {
+            enemyRender.color = defaultColor;
+        }
     }
 
     //Try to stay close to optimal range.
@@ -141,6 +157,11 @@ public class Enemy : MonoBehaviour
         HealthBar.InterpolateImmediate(HitPoints / MaxHitPoints);
     }
 
+    public void Targetted()
+    {
+        
+    }
+
     //Try to use a random ability.
     public bool UseRandomAbility()
     {
@@ -184,6 +205,7 @@ public class Enemy : MonoBehaviour
             damageText.text = "" + Mathf.Floor(damage);
             SimControl.DamageDone += damage;
             FightRecorder.DPSAccessor += damage;
+            damageTimer = 0.1f;
         }
         //Return true if dead.
         return (HitPoints <= 0.0f);

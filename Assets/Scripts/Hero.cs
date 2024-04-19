@@ -39,6 +39,7 @@ public class Hero : MonoBehaviour
     [HideInInspector]
     public Enemy Target; // Current target enemy.
 
+
     //References to the health and power UI bars, so we don't have to look them up all the time.
     [HideInInspector]
     public BarScaler HealthBar;
