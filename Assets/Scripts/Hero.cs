@@ -149,28 +149,43 @@ public class Hero : MonoBehaviour
         transform.position = new Vector3(newX, transform.position.y, transform.position.z);
     }
 
-    //Find the best target for the hero.
+    // Find the best target for the hero.
     public Enemy FindTarget()
     {
-        //Find all the enemies in the scene.
+        // Find all the enemies in the scene.
         var enemies = FindObjectsOfType<Enemy>();
-        if (enemies.Length == 0) //No enemies means no target.
+
+        // No enemies means no target.
+        if (enemies.Length == 0)
+        {
             return null;
-        //There are enemies, now find the best one.
+        }
+           
+        // There are enemies, now find the best one.
         Enemy target = null;
-        if (Target != null && Target.HitPoints > 0.0f) //Start with our current target if it is still alive.
+
+        // Start with our current target if it is still alive.
+        if (Target != null && Target.HitPoints > 0.0f)
+        {
             target = Target;
-        //Find the enemy with the lowest HP.
-        float lowestHP = float.MaxValue;
-        if (target) //Start with the current target so any ties don't cause target switching.
-            lowestHP = target.HitPoints;
-        //Loop through all the enemies to find the weakest enemy.
+        }
+     
+        // Find the enemy closest to the player.
+        float closest = float.MaxValue;
+
+        // Start with the current target so any ties don't cause target switching.
+        if (target)
+        {
+            closest = distanceToTarget(target);
+        }
+            
+        // Loop through all the enemies to find the closest enemy.
         foreach (Enemy enemy in enemies)
         {
-            if (enemy.HitPoints > 0 && enemy.HitPoints < lowestHP)
+            if (enemy.HitPoints > 0 && distanceToTarget(enemy) < closest)
             {
                 target = enemy;
-                lowestHP = enemy.HitPoints;
+                closest = distanceToTarget(enemy);
             }
         }
         return target;
@@ -292,6 +307,12 @@ public class Hero : MonoBehaviour
             //Uses the "empty string plus number" trick to make it a string.
             damageText.text = "" + Mathf.Floor(damage);
         }
+    }
+
+    // Calculate the distance to the enemy
+    private float distanceToTarget(Enemy enemy)
+    {
+        return Mathf.Abs(transform.position.x - enemy.transform.position.x);
     }
 
 }

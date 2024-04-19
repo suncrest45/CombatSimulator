@@ -440,6 +440,7 @@ MonoBehaviour:
   MoveSpeed: 2
   MaxPower: 100
   OptimalRange: 1.5
+  StunTimer: 0
   HitPoints: 200
   Power: 10
   Target: {fileID: 0}
@@ -1786,6 +1787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6deaac7b45ff9bd4086939ab628a4a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testerName: 
   Fights: 14
   Rounds: 1
   RoundDelay: 3
@@ -2272,10 +2274,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityName: OK BOOMER!!!
   CatchyOneLiner: OK BOOMER!!!
-  CooldownTime: 10
-  DamageDone: 100
+  CooldownTime: 7
+  DamageDone: 50
   PowerUsed: 50
-  MaximumRange: 30
+  MaximumRange: 4
   Stuns: 1
   StunTimer: 5
   Finisher: 0
@@ -2890,7 +2892,7 @@ MonoBehaviour:
   CatchyOneLiner: Check the internet lately
   CooldownTime: 1
   DamageDone: 2
-  PowerUsed: -5
+  PowerUsed: -2
   MaximumRange: 30
   Stuns: 0
   StunTimer: 0
