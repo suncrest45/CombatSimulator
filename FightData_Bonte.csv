@@ -1,0 +1,15 @@
+AI TYPE,Enemy Type,Group,VICTORIES,DEFEATS,Win%,DPS,ROUND LENGTH,Tweet,Light-Skin Stare,Fact-Check,Cancel,OK BOOMER!!!,Tweet %,Light-Skin Stare %,Fact-Check %,Cancel %,OK BOOMER!!! %,Ratings,Ratings Difference,
+Random,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Spam1,MeleeEnemy,N/A,1,0,100,218,0,9,1,1,0,1,0,0,0,0,0,0
+Spam2,SniperEnemy,N/A,1,0,100,218,0,9,1,2,0,1,0,0,0,0,0,25
+Spam3,MeleeEliteEnemy,N/A,1,0,100,116,0,8,2,2,2,0,0,0,0,0,0,15
+Spam4,N/A,3 x MeleeEnemy,1,0,100,416,0,8,1,1,0,1,0,0,0,0,0,50
+Spam5,N/A,3 x SniperEnemy,1,0,100,416,0,8,2,2,0,1,0,0,0,0,0,57.5
+Spam6,N/A,3 x MeleeEliteEnemy,0,1,0,64,0,7,0,0,1,0,0,0,0,0,0,0
+Spam7,N/A,3 x NFTBroEnemy,1,0,100,564,0,32,3,5,2,1,0,0,0,0,0,0
+Spam8,Group,3 x AIBroEnemy,1,0,100,418,0,9,0,2,0,1,0,0,0,0,0,75
+Spam9,Group,3 x RivalEnemy,0,1,0,10,0,5,0,1,0,0,0,0,0,0,0,0
+Spam10,Mixed,1 x MeleeEnemy 1 x SniperEnemy 1 x MeleeEliteEnemy,1,0,100,412,0,6,1,2,0,1,0,0,0,0,0,0
+Spam11,Mixed,2 x SniperEnemy 1 x RivalEnemy,1,0,100,526,0,13,2,4,2,1,0,0,0,0,0,6
+Spam12,Mixed,1 x NFTBroEnemy 1 x MeleeEliteEnemy 1 x SniperEnemy,1,0,100,408,0,4,0,1,0,1,0,0,0,0,0,17.5
+Spam13,Mixed,1 x AIBroEnemy 2 x MeleeEliteEnemy,1,0,100,408,0,4,0,1,0,1,0,0,0,0,0,55
