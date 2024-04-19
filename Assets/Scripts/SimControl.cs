@@ -510,6 +510,7 @@ public class SimControl : MonoBehaviour
         RoundCount = 0;
         // Show a bit of telemetry data on screen.
         SpawnInfoText(Victories + "-" + Defeats + "\n" + DamageDone / TotalFightTime + " DPS");
+        FightRecorder.AVGRoundTime += TotalFightTime;
         // Write all the telemetry data to the file.
         DataStream.WriteLine(CurrentAI
                              + "," + FightRecorder.NameAccessor
@@ -529,7 +530,7 @@ public class SimControl : MonoBehaviour
                              + "," + FightRecorder.GetAbilityPercentage("Fact-Check")
                              + "," + FightRecorder.GetAbilityPercentage("Cancel")
                              + "," + FightRecorder.GetAbilityPercentage("OK BOOMER!!!")
-                             + "," + FightRecorder.CalculateRoundRatings());
+                             + "," + FightRecorder.m_Ratings[RoundCount - 1]);
         // Reset the telemetry counters
         Victories = 0;
         Defeats = 0;

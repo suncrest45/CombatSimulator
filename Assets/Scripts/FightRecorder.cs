@@ -105,28 +105,6 @@ public static class FightRecorder
         }
     }
 
-    public static void LowestEnemyhealth(float enemyHealth)
-    {
-        if (enemyHealth < LowestEnemyHealthAccessor)
-        {
-            LowestEnemyHealthAccessor = enemyHealth;
-        }
-    }
-
-    public static void LowestEnemyHealth(float enemyHealth)
-    {
-
-    }
-
-   
-    public static void CalculateAbilityUsage()
-    {
-        foreach (string item in m_AbilityUsage.Keys)
-        {
-            m_AbilityPercentage[item] = (m_AbilityUsage[item] / m_TotalAbilityUse) * 100.0f;
-        }
-    }
-
     public static void SetAbilityUsage(string AbilityName) 
     { 
         m_AbilityUsage[AbilityName] += 1; 
@@ -135,7 +113,7 @@ public static class FightRecorder
 
     public static int GetAbilityUsage(string AbilityName) {  return m_AbilityUsage[AbilityName]; }
 
-    public static float GetAbilityPercentage(string AbilityName) { return m_AbilityPercentage[AbilityName]; }
+    public static float GetAbilityPercentage(string AbilityName) { return (m_AbilityUsage[AbilityName] / m_TotalAbilityUse) * 100.0f; }
 
     public static float CalculateRoundRatings()
     {
