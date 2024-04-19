@@ -127,9 +127,15 @@ public static class FightRecorder
         }
     }
 
-    public static void SetAbilityUsage(string AbilityName) { m_AbilityUsage[AbilityName] += 1; }
+    public static void SetAbilityUsage(string AbilityName) 
+    { 
+        m_AbilityUsage[AbilityName] += 1; 
+        m_TotalAbilityUse += 1;
+    }
 
     public static int GetAbilityUsage(string AbilityName) {  return m_AbilityUsage[AbilityName]; }
+
+    public static float GetAbilityPercentage(string AbilityName) { return m_AbilityPercentage[AbilityName]; }
 
     public static float CalculateRoundRatings()
     {

@@ -101,7 +101,7 @@ public class SimControl : MonoBehaviour
         // This can just then be directly opened in Excel.
         DataStream = new StreamWriter("FightData_" + testerName + ".csv", true);
         // Write some headers for our columns. You'll need more columns than this eventually.
-        DataStream.WriteLine("AI TYPE,Enemy Type,Group,VICTORIES,DEFEATS,Win%,DPS,ROUND LENGTH,Tweet,Light-Skin Stare,Fact-Check,Cancel,OK BOOMER!!!,Ratings,Ratings Difference,");
+        DataStream.WriteLine("AI TYPE,Enemy Type,Group,VICTORIES,DEFEATS,Win%,DPS,ROUND LENGTH,Tweet,Light-Skin Stare,Fact-Check,Cancel,OK BOOMER!!!,Tweet %,Light-Skin Stare %,Fact-Check %,Cancel %,OK BOOMER!!! %,Ratings,Ratings Difference,");
 
         // Get a reference to the canvas (used for UI objects).
         Canvas = GameObject.Find("Canvas");
@@ -524,6 +524,11 @@ public class SimControl : MonoBehaviour
                              + "," + FightRecorder.GetAbilityUsage("Fact-Check")
                              + "," + FightRecorder.GetAbilityUsage("Cancel")
                              + "," + FightRecorder.GetAbilityUsage("OK BOOMER!!!")
+                             + "," + FightRecorder.GetAbilityPercentage("Tweet")
+                             + "," + FightRecorder.GetAbilityPercentage("Light-Skin Stare")
+                             + "," + FightRecorder.GetAbilityPercentage("Fact-Check")
+                             + "," + FightRecorder.GetAbilityPercentage("Cancel")
+                             + "," + FightRecorder.GetAbilityPercentage("OK BOOMER!!!")
                              + "," + FightRecorder.CalculateRoundRatings());
         // Reset the telemetry counters
         Victories = 0;
