@@ -37,6 +37,8 @@ public class EnemyAbility : MonoBehaviour
     public bool Stuns = false;
     // This ability will summon cheap copies of enemies
     public bool summoner = false;
+    // This makes the opponent go berserk
+    public bool Berserk = false;
     // Make an ability inactive to temporarily or permanently not have it used.
     public bool Inactive = false;
     // The amount of rizz to steal
@@ -148,6 +150,8 @@ public class EnemyAbility : MonoBehaviour
         {
             ParentEnemy.Target.StunTimer = StunTimer;
         }
+
+        
 
         Text OneLiner = Object.Instantiate(SimControl.InfoTextPrefab, ParentEnemy.transform.position, Quaternion.identity, SimControl.Canvas.transform).GetComponent<Text>();
         OneLiner.text = CatchyOneLiner;

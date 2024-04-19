@@ -528,11 +528,11 @@ public class SimControl : MonoBehaviour
                              + "," + FightRecorder.GetAbilityUsage("Fact-Check")
                              + "," + FightRecorder.GetAbilityUsage("Cancel")
                              + "," + FightRecorder.GetAbilityUsage("OK BOOMER!!!")
-                             + "," + 0
-                             + "," + 0
-                             + "," + 0
-                             + "," + 0
-                             + "," + 0
+                             + "," + FightRecorder.GetAbilityPercentage("Tweet")
+                             + "," + FightRecorder.GetAbilityPercentage("Light-Skin Stare")
+                             + "," + FightRecorder.GetAbilityPercentage("Fact-Check")
+                             + "," + FightRecorder.GetAbilityPercentage("Cancel")
+                             + "," + FightRecorder.GetAbilityPercentage("OK BOOMER!!!")
                              + "," + FightRecorder.m_Ratings[RoundCount]);
         // Reset the telemetry counters
         Victories = 0;

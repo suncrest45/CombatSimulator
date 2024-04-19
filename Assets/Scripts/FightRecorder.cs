@@ -31,7 +31,7 @@ public static class FightRecorder
         m_Losses = 0;
         m_WinPercentage = 0.0f;
         m_AVGRoundTime = 0.0f;
-        m_TotalAbilityUse = 0;
+        m_TotalAbilityUse = 1;
         m_AbilityUsage = new Dictionary<string, int>();
         m_AbilityPercentage = new Dictionary<string, float>();
         m_Rounds = 10;
@@ -137,7 +137,7 @@ public static class FightRecorder
         m_Losses = 0;
         m_WinPercentage = 0.0f;
         m_AVGRoundTime = 0.0f;
-        m_TotalAbilityUse = 0;
+        m_TotalAbilityUse = 1;
         m_AbilityUsage = new Dictionary<string, int>();
         m_AbilityPercentage = new Dictionary<string, float>();
         m_Rounds = num_rounds;

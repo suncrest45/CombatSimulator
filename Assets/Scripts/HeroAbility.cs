@@ -182,6 +182,7 @@ public class HeroAbility : MonoBehaviour
 
         if (AbilityName == "Light-Skin Stare")
         {
+            
             Text Exclamation = Object.Instantiate(SimControl.InfoTextPrefab, ParentHero.Target.transform.position, Quaternion.identity, SimControl.Canvas.transform).GetComponent<Text>();
             Exclamation.text = "Oh No He's Hot!";
         }
@@ -197,8 +198,11 @@ public class HeroAbility : MonoBehaviour
 
             foreach (Enemy item in enemies) 
             {
-                Text Exclamation = Object.Instantiate(SimControl.InfoTextPrefab, item.transform.position, Quaternion.identity, SimControl.Canvas.transform).GetComponent<Text>();
-                Exclamation.text = "WHAT?!";
+                if (item.HitPoints > 0.0f)
+                {
+                    Text Exclamation = Object.Instantiate(SimControl.InfoTextPrefab, item.transform.position, Quaternion.identity, SimControl.Canvas.transform).GetComponent<Text>();
+                    Exclamation.text = "WHAT?!";
+                }
             }
         }
 
