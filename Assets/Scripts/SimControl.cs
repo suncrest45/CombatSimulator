@@ -28,6 +28,7 @@ using UnityEngine.UI; //This is here so we don't have to type out longer names f
 //Remember that the class name MUST be identical to the file name!
 public class SimControl : MonoBehaviour
 {
+    public string testerName = string.Empty;
     //Does the simulation start in Auto mode?
     public static bool AutoMode = false;
     //Does the simulation start in Fast mode?
@@ -98,7 +99,7 @@ public class SimControl : MonoBehaviour
     {
         // Create a comma-separated value file to output telemetry data.
         // This can just then be directly opened in Excel.
-        DataStream = new StreamWriter("FightData" + DateTime.Now.ToString("yyyyMMdd_HHmmss") +".csv", true);
+        DataStream = new StreamWriter("FightData_" + testerName + ".csv", true);
         // Write some headers for our columns. You'll need more columns than this eventually.
         DataStream.WriteLine("AI TYPE,Enemy Type,Group,VICTORIES,DEFEATS,Win%,DPS,ROUND LENGTH,Tweet,Light-Skin Stare,Fact-Check,Cancel,OK BOOMER!!!,Ratings,Ratings Difference,");
 
