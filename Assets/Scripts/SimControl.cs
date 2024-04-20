@@ -65,6 +65,7 @@ public class SimControl : MonoBehaviour
     // How long a delay between rounds?
     public float RoundDelay = 3.0f;
     private float RoundTimer = 3.0f;
+    private float tutorialTimer = 999.0f;
 
     // How far from the center of the screen is the "edge" of the arena?
     public static float EdgeDistance = 8.0f;
@@ -119,11 +120,17 @@ public class SimControl : MonoBehaviour
         InitialiseEnemies();
 
         UpdateTelemetryHealthValues();
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (tutorialTimer > 0.0f)
+        {
+            SpawnInfoText("Please read the ability descriptions below\n Press S to start when ready", true);
+        }
         // If the ESC key is pressed, exit the program.
         if (Input.GetKeyDown(KeyCode.Escape) == true)
             Application.Quit();
@@ -155,6 +162,7 @@ public class SimControl : MonoBehaviour
         {
             if (GroupMode == false)
             {
+                tutorialTimer = 0.0f;
                 GroupMode = !GroupMode;
                 MixedMode = false;
                 StandardMode = false;
@@ -180,6 +188,7 @@ public class SimControl : MonoBehaviour
         {
             if (MixedMode == false)
             {
+                tutorialTimer = 0.0f;
                 MixedMode = !MixedMode;
                 GroupMode = false;
                 StandardMode = false;
@@ -204,6 +213,7 @@ public class SimControl : MonoBehaviour
         {
             if (TelemetryMode == false)
             {
+                tutorialTimer = 0.0f;
                 TelemetryMode = !TelemetryMode;
                 GroupMode = false;
                 StandardMode = false;
@@ -228,6 +238,7 @@ public class SimControl : MonoBehaviour
         {
             if (StandardMode == false)
             {
+                tutorialTimer = 0.0f;
                 StandardMode = !StandardMode;
                 AutoMode = false;
                 FastMode = false;
@@ -245,6 +256,7 @@ public class SimControl : MonoBehaviour
         // If the R key is pressed, restart the simulation.
         if (Input.GetKeyDown(KeyCode.R) == true)
         {
+            tutorialTimer = 0.0f;
             FightCount = 0;
             RoundCount = 0;
             RoundTimer = RoundDelay;
