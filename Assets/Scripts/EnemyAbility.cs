@@ -37,8 +37,6 @@ public class EnemyAbility : MonoBehaviour
     public bool Stuns = false;
     // This ability will summon cheap copies of enemies
     public bool summoner = false;
-    // This makes the opponent go berserk
-    public bool Berserk = false;
     // Make an ability inactive to temporarily or permanently not have it used.
     public bool Inactive = false;
     // The amount of rizz to steal
@@ -151,6 +149,7 @@ public class EnemyAbility : MonoBehaviour
             ParentEnemy.Target.StunTimer = StunTimer;
         }
 
+        // If the enemy is a null reference kill an AIbro
         if (ParentEnemy.enemyType == Enemy.EnemyType.NULLReference)
         {
             var enemies = FindObjectsOfType<Enemy>();
@@ -161,10 +160,16 @@ public class EnemyAbility : MonoBehaviour
                     item.TakeDamage(999.0f);
                     ParentEnemy.TakeDamage(999.0f);
                     Text fail = Object.Instantiate(SimControl.InfoTextPrefab, item.transform.position, Quaternion.identity, SimControl.Canvas.transform).GetComponent<Text>();
-                    fail.text = "Dear God";
+                    fail.text = "Dear God!!";
                 }
                 break;
             }
+        }
+
+        // The berserker takes damage when using abilities
+        if (ParentEnemy.enemyType == Enemy.EnemyType.Berserker)
+        {
+            ParentEnemy.TakeDamage(50);
         }
 
 
