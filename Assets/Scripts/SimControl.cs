@@ -101,7 +101,7 @@ public class SimControl : MonoBehaviour
         // This can just then be directly opened in Excel.
         DataStream = new StreamWriter("FightData_" + testerName + ".csv", true);
         // Write some headers for our columns. You'll need more columns than this eventually.
-        DataStream.WriteLine("AI TYPE,Enemy Type,Group,VICTORIES,DEFEATS,Win%,DPS,ROUND LENGTH,Tweet,Light-Skin Stare,Fact-Check,Cancel,OK BOOMER!!!,Tweet %,Light-Skin Stare %,Fact-Check %,Cancel %,OK BOOMER!!! %,Ratings,Ratings Difference,");
+        DataStream.WriteLine("AI TYPE,Enemy Type,Group,VICTORIES,DEFEATS,Win%,DPS,Healing Done,ROUND LENGTH,Tweet,Light-Skin Stare,Fact-Check,Cancel,OK BOOMER!!!,Tweet %,Light-Skin Stare %,Fact-Check %,Cancel %,OK BOOMER!!! %,Ratings,Ratings Difference,");
 
         // Get a reference to the canvas (used for UI objects).
         Canvas = GameObject.Find("Canvas");
@@ -525,6 +525,7 @@ public class SimControl : MonoBehaviour
                              + "," + FightRecorder.LossesAcessor
                              + "," + FightRecorder.CalculateWinPercentage()
                              + "," + FightRecorder.DPSAccessor / Rounds
+                             + "," + FightRecorder.HealingAccessor
                              + "," + FightRecorder.CalculateAVGRoundTime()
                              + "," + FightRecorder.GetAbilityUsage("Tweet")
                              + "," + FightRecorder.GetAbilityUsage("Light-Skin Stare")
@@ -954,7 +955,9 @@ public class SimControl : MonoBehaviour
             Instantiate(EnemyTypePrefabs[TelemetryMixedPresets[FightCount - 13, 2]], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
 
             FightRecorder.NameAccessor = "Mixed";
-            FightRecorder.GroupAccessor = (FightCount - 13).ToString();
+            FightRecorder.GroupAccessor = "1 x " + EnemyTypePrefabs[TelemetryMixedPresets[FightCount - 13, 0]].name +
+                                          " 1 x " + EnemyTypePrefabs[TelemetryMixedPresets[FightCount - 13, 1]].name +
+                                          " 1 x " + EnemyTypePrefabs[TelemetryMixedPresets[FightCount - 13, 2]].name;
         }
         // Single Enemy Fights using Smart AI
         else if (FightCount <= 24)
@@ -991,7 +994,9 @@ public class SimControl : MonoBehaviour
             Instantiate(EnemyTypePrefabs[TelemetryMixedPresets[FightCount - 31, 2]], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
 
             FightRecorder.NameAccessor = "Mixed";
-            FightRecorder.GroupAccessor = (FightCount - 31).ToString();
+            FightRecorder.GroupAccessor = "1 x " + EnemyTypePrefabs[TelemetryMixedPresets[FightCount - 31, 0]].name +
+                                          " 1 x " + EnemyTypePrefabs[TelemetryMixedPresets[FightCount - 31, 1]].name +
+                                          " 1 x " + EnemyTypePrefabs[TelemetryMixedPresets[FightCount - 31, 2]].name;
         }
 
         // Call the Initialize() functions for the player.

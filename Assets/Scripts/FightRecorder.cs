@@ -5,7 +5,6 @@ using UnityEngine;
 public static class FightRecorder
 {
 
-    private static string m_AIType;
     private static string m_EnemyName;
     private static string m_GroupType;
     private static int m_Wins;
@@ -20,11 +19,11 @@ public static class FightRecorder
     public static float[] m_Ratings;
     private static float m_LowestPlayerHealth;
     private static float m_LowestEnemyHealth;
+    private static float m_HealingDone;
 
     // Constructor for the fight recorder class
     static FightRecorder()
     {
-        m_AIType = string.Empty;
         m_EnemyName = string.Empty;
         m_GroupType = string.Empty; 
         m_Wins = 0;
@@ -37,6 +36,7 @@ public static class FightRecorder
         m_Rounds = 10;
         m_DamageDone = 0.0f;
         m_Ratings = new float[m_Rounds];
+        m_HealingDone = 0.0f;
     }
 
     // Calculate The Win Percentage
@@ -59,6 +59,12 @@ public static class FightRecorder
     {
         get => m_Losses;
         set => m_Losses = value;
+    }
+
+    public static float HealingAccessor
+    {
+        get => m_HealingDone;
+        set => m_HealingDone = value;
     }
 
     public static float DPSAccessor
@@ -115,22 +121,9 @@ public static class FightRecorder
 
     public static float GetAbilityPercentage(string AbilityName) { return (m_AbilityUsage[AbilityName] / m_TotalAbilityUse) * 100.0f; }
 
-    public static float CalculateRoundRatings()
-    {
-        float total = 0.0f;
-
-        for (int i = 0; i < m_Ratings.Length; i++)
-        {
-            total += m_Ratings[i];
-        }
-
-        return total /= m_Ratings.Length;
-    }
-
     // Resets the recorder for a new fight
     public static void InitRecorder(HeroAbility[] playerAbilities, int num_rounds)
     {
-        m_AIType = string.Empty;
         m_EnemyName = string.Empty;
         m_GroupType = string.Empty;
         m_Wins = 0;
@@ -145,6 +138,7 @@ public static class FightRecorder
         m_Ratings = new float[num_rounds];
         m_LowestEnemyHealth = 0.0f;
         m_LowestPlayerHealth = 0.0f;
+        HealingAccessor = 0.0f;
 
         // Initialise the dictionaries keeping track of the abilities.
         for (int i = 0; i < playerAbilities.Length; i++)

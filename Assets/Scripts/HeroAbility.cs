@@ -178,6 +178,7 @@ public class HeroAbility : MonoBehaviour
         if (heal == true)
         {
             ParentHero.TakeDamage(-healAmount);
+            FightRecorder.HealingAccessor += healAmount;
         }
 
         if (AbilityName == "Light-Skin Stare")
