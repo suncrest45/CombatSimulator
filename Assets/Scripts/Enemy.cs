@@ -69,12 +69,6 @@ public class Enemy : MonoBehaviour
 
     public EnemyType enemyType;
 
-    public static string NameAccessor
-    { 
-        get => EnemyName;
-        set => EnemyName = value; 
-    }
-
     //Start is called before the first frame update
     void Start()
     {
@@ -155,11 +149,6 @@ public class Enemy : MonoBehaviour
         Target = GameObject.Find("Hero").GetComponent<Hero>();
         //Make sure the health bar gets reset as well.
         HealthBar.InterpolateImmediate(HitPoints / MaxHitPoints);
-    }
-
-    public void Targetted()
-    {
-        
     }
 
     //Try to use a random ability.

@@ -1,0 +1,12 @@
+AI TYPE,Enemy Type,Group,VICTORIES,DEFEATS,Win%,DPS,ROUND LENGTH,Tweet,Light-Skin Stare,Fact-Check,Cancel,OK BOOMER!!!,Tweet %,Light-Skin Stare %,Fact-Check %,Cancel %,OK BOOMER!!! %,Ratings,Ratings Difference,
+Random,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Random,MeleeEnemy,N/A,10,0,100,64.2,4451.732,71,19,21,10,0,0,0,0,0,0,98
+Random,SniperEnemy,N/A,10,0,100,61.4,2771.381,57,13,20,10,0,0,0,0,0,0,95
+Random,MeleeEliteEnemy,N/A,2,8,0,185.8,40144.04,204,38,55,29,0,0,0,0,0,0,17.5
+Random,NFTBroEnemy,N/A,10,0,100,62,3390.736,60,14,24,10,0,0,0,0,0,0,100
+Random,AIBroEnemy,N/A,6,4,0,186.8,31087.92,184,33,52,30,0,0,0,0,0,0,99.5
+Random,RivalEnemy,N/A,9,1,0,208.8,59496.3,244,49,66,32,0,0,0,0,0,0,20.5
+Random,Group,3 X MeleeEnemy,10,0,100,190.4,39917.67,202,43,58,30,0,0,0,0,0,0,90
+Random,Group,3 X SniperEnemy,10,0,100,188.2,33631.48,191,37,54,30,0,0,0,0,0,0,72.5
+Random,Group,3 X MeleeEliteEnemy,0,10,0,35.6,2617.242,53,13,18,5,0,0,0,0,0,0,-25
+Random,Group,3 X NFTBroEnemy,10,0,100,182.4,107766.6,337,65,92,23,0,0,0,0,0,0

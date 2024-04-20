@@ -30,6 +30,10 @@ public class Hero : MonoBehaviour
     public float MaxPower = 100;
     public float OptimalRange = 5.0f;
     public float StunTimer = 0.0f;
+    private float damageTimer = 0.0f;
+    private SpriteRenderer playerRender;
+    private Color defaultColor;
+    private Color damageColor = Color.red;
 
     [HideInInspector]
     public float HitPoints = 200; // Current hit points
@@ -57,6 +61,9 @@ public class Hero : MonoBehaviour
         //Use GetComponent so we don't have to use it later to access the functionality we want.
         HealthBar = GameObject.Find("HeroResources/HealthBar").GetComponent<BarScaler>(); 
         PowerBar = GameObject.Find("HeroResources/PowerBar").GetComponent<BarScaler>();
+
+        playerRender = GetComponentInParent<SpriteRenderer>();
+        defaultColor = playerRender.color;
     }
 
     //Update is called once per frame
@@ -102,6 +109,16 @@ public class Hero : MonoBehaviour
         }
 
         Target = FindTarget();
+
+        if (damageTimer > 0.0f)
+        {
+            damageTimer -= SimControl.DT;
+            playerRender.color = damageColor;
+        }
+        else
+        {
+            playerRender.color = defaultColor;
+        }
     }
 
     //Try to stay close to optimal range. Note this is done even in Auto mode.
@@ -248,17 +265,12 @@ public class Hero : MonoBehaviour
             UseAbility(4);
         }
 
-
-        // Keep a record of target distance
-        float distanceToTarget = Mathf.Abs(transform.position.x - Target.transform.position.x);
-
-
         // Spam the tweet and heal ability
         UseAbility(0);
         UseAbility(2);
 
         // If an enemy is very close to the player use the light skin stare
-        if (distanceToTarget < OptimalRange)
+        if (distanceToTarget(Target) < OptimalRange)
         {
             UseAbility(1);
             UseAbility(3);
@@ -306,12 +318,18 @@ public class Hero : MonoBehaviour
             //Set the damage text to just the integer amount of the damage done.
             //Uses the "empty string plus number" trick to make it a string.
             damageText.text = "" + Mathf.Floor(damage);
+            damageTimer = 0.1f;
         }
     }
 
     // Calculate the distance to the enemy
     private float distanceToTarget(Enemy enemy)
     {
+        if (enemy == null)
+        {
+            return 0.0f;
+        }
+
         return Mathf.Abs(transform.position.x - enemy.transform.position.x);
     }
 

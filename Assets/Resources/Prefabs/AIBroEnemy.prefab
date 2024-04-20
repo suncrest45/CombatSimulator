@@ -164,6 +164,7 @@ MonoBehaviour:
   RizzSteal: 0
   Stuns: 0
   summoner: 0
+  Berserk: 0
   Inactive: 1
   RizzToSteal: 0
   CatchyOneLiner: Nothing
@@ -747,13 +748,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b79a8d4f3daf33d40b36b8c4961690e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CooldownTime: 7
+  CooldownTime: 5
   DamageDone: 0
   MaximumRange: 30
   StunTimer: 0
   RizzSteal: 0
   Stuns: 0
   summoner: 1
+  Berserk: 0
   Inactive: 0
   RizzToSteal: 0
   CatchyOneLiner: Behold my master piece

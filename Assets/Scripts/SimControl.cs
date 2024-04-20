@@ -416,12 +416,12 @@ public class SimControl : MonoBehaviour
         else if (FightCount % 14 == 7)
         {
             // Adjust the starting X/Y a bit for groups.
-            Instantiate(EnemyTypePrefabs[3], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
+            Instantiate(EnemyTypePrefabs[0], new Vector3(StartingX + 1, -1.5f, 0), Quaternion.Euler(0, 0, 90), null);
             Instantiate(EnemyTypePrefabs[3], new Vector3(StartingX, 0, 0), Quaternion.Euler(0, 0, 90), null);
-            Instantiate(EnemyTypePrefabs[3], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
+            Instantiate(EnemyTypePrefabs[0], new Vector3(StartingX + 1, 1.5f, 0), Quaternion.Euler(0, 0, 90), null);
 
             FightRecorder.NameAccessor = "N/A";
-            FightRecorder.GroupAccessor = "3 x " + EnemyTypePrefabs[3].name;
+            FightRecorder.GroupAccessor = "1 x " + EnemyTypePrefabs[3].name + "2 x " + EnemyTypePrefabs[0].name;
         }
         else if (FightCount % 14 == 8)
         {
@@ -649,7 +649,7 @@ public class SimControl : MonoBehaviour
         {
             totalCurrentHP += item.MaxHitPoints;
         }
-        FightRecorder.LowestPlayerHealthAccessor = totalCurrentHP;
+        FightRecorder.LowestEnemyHealthAccessor = totalCurrentHP;
     }
 
     void StandardSim()

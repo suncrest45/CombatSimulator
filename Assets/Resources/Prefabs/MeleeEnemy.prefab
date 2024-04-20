@@ -388,6 +388,7 @@ MonoBehaviour:
   RizzSteal: 0
   Stuns: 0
   summoner: 0
+  Berserk: 0
   Inactive: 1
   RizzToSteal: 0
   CatchyOneLiner: Die Faster
@@ -544,6 +545,7 @@ MonoBehaviour:
   RizzSteal: 0
   Stuns: 0
   summoner: 0
+  Berserk: 0
   Inactive: 0
   RizzToSteal: 0
   CatchyOneLiner: Die
@@ -652,7 +654,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHitPoints: 50
-  MoveSpeed: 0.75
+  MoveSpeed: 1.25
   OptimalRange: 1
   StunTimer: 0
   HitPoints: 200

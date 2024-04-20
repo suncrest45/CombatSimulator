@@ -151,7 +151,23 @@ public class EnemyAbility : MonoBehaviour
             ParentEnemy.Target.StunTimer = StunTimer;
         }
 
-        
+        if (ParentEnemy.enemyType == Enemy.EnemyType.NULLReference)
+        {
+            var enemies = FindObjectsOfType<Enemy>();
+            foreach (Enemy item in enemies)
+            {
+                if (item.enemyType == Enemy.EnemyType.AIBro)
+                {
+                    item.TakeDamage(999.0f);
+                    ParentEnemy.TakeDamage(999.0f);
+                    Text fail = Object.Instantiate(SimControl.InfoTextPrefab, item.transform.position, Quaternion.identity, SimControl.Canvas.transform).GetComponent<Text>();
+                    fail.text = "Dear God";
+                }
+                break;
+            }
+        }
+
+
 
         Text OneLiner = Object.Instantiate(SimControl.InfoTextPrefab, ParentEnemy.transform.position, Quaternion.identity, SimControl.Canvas.transform).GetComponent<Text>();
         OneLiner.text = CatchyOneLiner;
