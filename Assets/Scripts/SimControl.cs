@@ -121,16 +121,13 @@ public class SimControl : MonoBehaviour
 
         UpdateTelemetryHealthValues();
 
-        
+        SpawnInfoText("Please read the ability descriptions below\n Press S to start when ready", false);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (tutorialTimer > 0.0f)
-        {
-            SpawnInfoText("Please read the ability descriptions below\n Press S to start when ready", true);
-        }
         // If the ESC key is pressed, exit the program.
         if (Input.GetKeyDown(KeyCode.Escape) == true)
             Application.Quit();
