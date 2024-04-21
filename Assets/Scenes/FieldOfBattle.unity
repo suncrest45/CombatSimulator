@@ -694,7 +694,7 @@ MonoBehaviour:
 
     AoE & Stuns
 
-    30 Range'
+    4 Range'
 --- !u!222 &398758000
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1420,7 +1420,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '5s Cooldown
+  m_Text: '4s Cooldown
 
     50 Damage
 
@@ -1790,7 +1790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6deaac7b45ff9bd4086939ab628a4a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testerName: Telemetry
+  testerName: Lao
   Fights: 14
   Rounds: 1
   RoundDelay: 3
@@ -2052,7 +2052,7 @@ MonoBehaviour:
 
     2 Damage
 
-    +5 Rizz
+    +2 Rizz
 
     30 Range'
 --- !u!222 &1047618469
@@ -3791,7 +3791,7 @@ MonoBehaviour:
 
     20 Rizz
 
-    4 Range'
+    30 Range'
 --- !u!222 &2074801872
 CanvasRenderer:
   m_ObjectHideFlags: 0
