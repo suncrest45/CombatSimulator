@@ -48,6 +48,8 @@ public class HeroAbility : MonoBehaviour
     public bool Inactive = false;
     // Mark an ability as a heal.
     public bool heal = false;
+    // Mark an ability as knock back
+    public bool KnockBack = false;
     // The amount of healing the ability does.
     public float healAmount = 0.0f;
     
@@ -175,6 +177,23 @@ public class HeroAbility : MonoBehaviour
             }
         }
 
+        if (KnockBack == true)
+        {
+            if (ParentHero.Target == null)
+            {
+                return false;
+            }
+            // We need to move, so get our current X position.
+            float newX = ParentHero.Target.transform.position.x;
+            newX += 2;
+
+            // Don't go past the edge of the arena.
+            newX = Mathf.Clamp(newX, -SimControl.EdgeDistance, SimControl.EdgeDistance);
+            // Update the transform.
+            ParentHero.Target.transform.position = new Vector3(newX, ParentHero.Target.transform.position.y, ParentHero.Target.transform.position.z);
+            ParentHero.Target.StunTimer = 1.0f;
+        }
+
         if (heal == true)
         {
             ParentHero.TakeDamage(-healAmount);
@@ -208,8 +227,15 @@ public class HeroAbility : MonoBehaviour
         }
 
         Text OneLiner = Object.Instantiate(SimControl.InfoTextPrefab, ParentHero.transform.position, Quaternion.identity, SimControl.Canvas.transform).GetComponent<Text>();
-        OneLiner.text = CatchyOneLiner;
-
+        if (ParentHero.Target != null &&((AbilityName == "Tweet" || AbilityName == "Cancel") && ParentHero.Target.StunTimer > 0.0f))
+        {
+            OneLiner.text = "Crotch Shot";
+        }
+        else
+        {
+            OneLiner.text = CatchyOneLiner;
+        }
+        
         FightRecorder.SetAbilityUsage(AbilityName);
 
         // Put the ability on cooldown.
