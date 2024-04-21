@@ -181,6 +181,10 @@ public class Enemy : MonoBehaviour
     {
         if (damage != 0.0f) //Don't bother if the damage is 0
         {
+            if (StunTimer > 0.0f)
+            {
+                damage *= 2;
+            }
             //Accumulate the telemetry data.
             SimControl.DamageDone += Mathf.Min(Mathf.Max(damage,0.0f), HitPoints); //Can't do more damage than the target has HP, and negative damage is actually healing.
             //Make sure hit points do not go negative (or above max, because the "damage" could be negative, i.e., healing).
