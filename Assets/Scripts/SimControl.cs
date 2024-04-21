@@ -555,7 +555,7 @@ public class SimControl : MonoBehaviour
         }
         else
         {
-            if (FightCount < 18)
+            if (FightCount < 19)
             {
                 CurrentAI = "Random";
             }
