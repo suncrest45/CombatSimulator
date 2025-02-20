@@ -40,7 +40,7 @@ public class ThrowObject : MonoBehaviour
 		//component's parent game object has that type of component. Note we don't
 		//need to check for a null reference here because of the RequireComponent()
 		//statement above.
-        GetComponent<Rigidbody2D>().velocity = new Vector2(StartingXVelocity + Random.Range(-RandomXVariation, RandomXVariation), StartingYVelocity + Random.Range(-RandomYVariation, RandomYVariation));
+        GetComponent<Rigidbody2D>().linearVelocity = new Vector2(StartingXVelocity + Random.Range(-RandomXVariation, RandomXVariation), StartingYVelocity + Random.Range(-RandomYVariation, RandomYVariation));
 		//The RigidBody2D component has a velocity property we can set.
 		//We use a Vector2 here because this is 2D rigid body, but in many other places
 		//a Vector3 will be needed even thoigh this is a 2D game.
